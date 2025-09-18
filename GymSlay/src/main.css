@@ -1,2 +1,3 @@
-/* Här importeras endast globala css-filer */
-/* Specifika filer importeras i respektive jsx-fil */
+@import url(./assets/basestyling/base.css);
+@import url(./assets/basestyling/fonts.css);
+@import url(./assets/basestyling/theme.css);
