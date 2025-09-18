@@ -1,3 +1,21 @@
 :root{
-  
+    --accent-110: #E0B800;
+    --accent-100: #FCC900;
+    --accent-90: #FFD94D;
+    --accent-80: #FFE680;
+    --accent-70: #fff4b3;
+
+    --red-110: #FB0A0E;
+    --red-100: #FB090D70;
+    --red-90: #FF4D50;
+
+    --grey-110: #3A3A3A;
+    --grey-100: #434343;
+    --grey-90: #5E5E5E;
+    --grey-80: #5A5A58D6;
+    --grey-50: #C2C2C2;
+
+    --success: #00A82D;
+    --warning: #FFC107;
+    --error: #D32F2E;
 }
