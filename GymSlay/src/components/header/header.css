@@ -11,4 +11,5 @@
 .logo {
     height: 3.25rem;
     width: 5.5rem;
+    cursor: pointer;
 }
