@@ -1,0 +1,12 @@
+.btn-menu {
+    background-color: transparent;
+    border: none;
+    transition: all 0.2s ease-in-out;
+    height: 3.4rem;
+    width: 3.4rem;
+    cursor: pointer;
+}
+
+.menu-active {
+    transform: rotate(90deg);
+}
