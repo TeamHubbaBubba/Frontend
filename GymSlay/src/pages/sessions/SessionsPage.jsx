@@ -5,15 +5,18 @@ export const SessionsPage = () => {
   return (
     <>
         <div className="card">
-            <img></img>
-            <div>
+            <img className="image" src="/src/assets/images/girl-training.jpg" alt="Girl training."></img>
+            <div className="card-content-group">
                 <div className="title">Titel</div>
-                <div className="spots">Platser</div>
+                <div className="spots-group">
+                    <div className="spots">Platser: 24</div>
+                    <div className="progress-bar"></div>
+                </div>
             </div>
-            <div className="intensity"></div>
-            <div>
-                <button className="btn">Anmäl</button>
-                <button className="btn">Avanmäl</button>
+            <div className="intensity">Nybörjare</div>
+            <div className="buttons-group">
+                <button className="btn-chevron"></button>
+                <button className="btn-booking">Boka</button>
             </div>
         </div>
     </>
