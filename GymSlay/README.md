@@ -25,3 +25,13 @@ Theme.css används för olika teman och färgvariabler på sidan.
 Components är självständiga byggstenar som kan återanvändas på olika sidor. T.ex. buttons, cards, header, footer, nav.
 
 Alla olika typer av formulär och kort etc läggs i separata jsx-filer men med gemensam css-fil.
+
+I App.jsx sköts routingen mellan sidorna genom att innehållet i den specifika layouten läggs "inuti" dess route-tag. 
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route path="sessions" element={<SessionsPage />} />
+        {/* Här lägger du in sidan som ska visas inuti MainLayout.
+        Path är det som du skriver i urlen, typ localhost/sessions i detta fallet. */}
+      </Route>
+    </Routes>
+I layout-filen sköts sedan renderingen av det som visas i vyn med taggen <Outlet />

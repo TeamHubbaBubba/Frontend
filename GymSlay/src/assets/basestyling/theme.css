@@ -14,8 +14,15 @@
     --grey-90: #5E5E5E;
     --grey-80: #595958D6;
     --grey-50: #C2C2C2;
+    --grey-30: #c2c2c22a;
 
     --success: #00A82D;
     --warning: #FFC107;
     --error: #D32F2E;
+
+
+
+    --card-background: var(--grey-80);
+    --card-background-hover: var(--grey-100);
+    --card-border: var(--grey-30);
 }
