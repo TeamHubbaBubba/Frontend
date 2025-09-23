@@ -1,21 +1,35 @@
 import {useState} from "react"
 import "./forms.css"
+import { createSession } from "../../services/api"
 
-export const SessionsForm = () => {
+export const CreateSessionForm = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [sessionDate, setSessionDate] = useState("")
+  const [maxParticipants, setMaxParticipants] = useState("")
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const payload = {
       title,
       description,
+      maxParticipants: Number(maxParticipants),
       sessionDate
     }
 
-    console.log("Payload skickas:", payload)
+    try {
+      const response = await createSession(payload)
+
+      if (response.ok) {
+        const data = await response.json()
+        console.log("Session created:", data)
+      } else {
+        console.error("Failed to create session")
+      }
+    } catch (error) {
+      console.error("Error:", error)
+    }
   }
 
     return (
@@ -55,6 +69,18 @@ export const SessionsForm = () => {
           value={sessionDate}
           onChange={(e) => setSessionDate(e.target.value)}
         />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="maxParticipants">Max antal deltagare</label>
+          <input 
+            type="number" 
+            id="maxParticipants" 
+            name="maxParticipants" 
+            className="form-input"
+            value={maxParticipants}
+            onChange={(e) => setMaxParticipants(e.target.value)}
+          />
         </div>
 
         <button type="submit" className="btn btn-primary">Spara</button>
