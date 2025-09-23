@@ -44,15 +44,28 @@ export const SessionsPage = () => {
     }
 
     if (loading) {
-        return <div className="message">Loading...</div>;
+        return (
+            <div className="wrapper">
+                <div className="message">Loading...</div>
+            </div>
+        )
     }
     
     else if (error) {
-        return <div className="message error">Något gick fel... Försök igen senare.</div>;
+        return (
+            <div className="wrapper">
+                <div className="message error">Något gick fel... Försök igen senare.</div>
+            </div>
+        )
     }
 
     else if (!sessions || sessions.length === 0) {
-        return <div className="message">Inga sessioner hittades</div>;
+
+        return (
+            <div className="wrapper">
+                <div className="message">Inga sessioner hittades</div>
+            </div>
+        )
     }
 
     return (
