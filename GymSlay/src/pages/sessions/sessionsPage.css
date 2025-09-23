@@ -72,16 +72,29 @@
         align-items: flex-end;
 
         .btn-chevron {
-            width: 1.3rem;
-            height: 1.3rem;
+            width: 1.5rem;
+            height: 1.5rem;
             border-radius: 50%;
-            background-color: var(--accordion-btn-background);
+            background-color: var(--chevron-btn-background);
             border: none;
             cursor: pointer;
+            transition: background-color .2s ease-in-out;
+
+            &:hover {
+                background-color: var(--chevron-btn-hover);
+            }
+
+            svg {
+                transition: transform .2s ease-in-out;
+            }
+        }
+
+        .btn-chevron.rotate svg {
+            transform: rotate(180deg);
         }
 
         .btn-booking {
-            padding: .1em .8em .2em .8em;
+            padding: .2em .8em .3em .8em;
             background-color: var(--red-110);
             border: none;
             font-size: .62rem;;

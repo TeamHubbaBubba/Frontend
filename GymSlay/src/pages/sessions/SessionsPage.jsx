@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './sessionsPage.css'
+import { FaChevronDown } from 'react-icons/fa6';
 
 export const SessionsPage = () => {
+    const chevronRef = useRef();
+
+    const handleClick = () => {
+        console.log("Clicked");
+        chevronRef.current.classList.toggle("rotate");
+    }
+
   return (
     <>
         <div className="card">
@@ -15,7 +23,9 @@ export const SessionsPage = () => {
             </div>
             <div className="intensity">Nybörjare</div>
             <div className="buttons-group">
-                <button className="btn-chevron"></button>
+                <button ref={chevronRef} className="btn-chevron" onClick={handleClick}>
+                    <FaChevronDown />
+                </button>
                 <button className="btn-booking">Boka</button>
             </div>
         </div>

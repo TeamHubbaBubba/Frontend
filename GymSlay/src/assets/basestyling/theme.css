@@ -26,7 +26,8 @@
     --card-background-hover: var(--grey-100);
     --card-border: var(--grey-30);
 
-    --accordion-btn-background: var(--grey-30);
+    --chevron-btn-background: var(--grey-30);
+    --chevron-btn-hover: var(--grey-100);
 
     --booking-btn-background: var(--red-110);
     --booking-btn-hover: var(--error);
