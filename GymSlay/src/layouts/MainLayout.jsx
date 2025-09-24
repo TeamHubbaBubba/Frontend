@@ -8,9 +8,10 @@ export const MainLayout = () => {
   return (
     <>
       <Header />
-      
+      <main className="wrapper">
         <Outlet />
-        {/* Här visas alla sidor som är inuti MainLayout, t.ex SessionsPage */}
+
+      </main>
     </>
   )
 }

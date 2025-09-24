@@ -1,0 +1,49 @@
+.session-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: var(--grey-80);
+  border-radius: 8px;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-input,
+.form-textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--grey-50);
+  border-radius: 4px;
+}
+
+.btn {
+  padding: 0.6rem 1rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn-primary {
+  background: var(--red-90);
+  color: var(--accent-70);
+}
