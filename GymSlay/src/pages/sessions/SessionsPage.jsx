@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './sessionsPage.css'
 import { FaChevronDown } from 'react-icons/fa6';
+import { CgClose } from 'react-icons/cg';
 
 export const SessionsPage = () => {
     const [sessions, setSessions] = useState([]);
@@ -27,7 +28,7 @@ export const SessionsPage = () => {
         setError(null);
         
         try {
-            const response = await fetch('http://localhost:7067/api/session');
+            const response = await fetch('https://localhost:7067/api/sessions');
 
             if(!response.ok) {
                 console.log("Fetch failed", response.statusText);
@@ -37,8 +38,8 @@ export const SessionsPage = () => {
             }
 
             const data = await response.json();
-            setSessions(data);
-            console.log('Sessions fetched:', data);
+            setSessions(data.data);
+            console.log('Sessions fetched:', data.data);
  
         }
         catch (error) {
@@ -106,13 +107,13 @@ export const SessionsPage = () => {
             <div className="wrapper">
                 {sessions.map(session => {
                     return (
-                    <div key={session.Id} className="card">
+                    <div key={session.id} className="card">
                         <img className="image" src="/src/assets/images/girl-training.jpg" alt="Girl training."></img>
                         <div className="card-content-group">
-                            <div className="title">{session.Title}</div>
+                            <div className="title">{session.title}</div>
                             <div className="details-group">
-                                <div className="intensity">{session.Intensity}</div>
-                                <div className="spots">Platser: {session.CurrentParticipants}/{session.MaxParticipants}</div>
+                                <div className="intensity">{session.intensity}</div>
+                                <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
                                   
                                 {/* <div className="progress-bar"></div> */}
                             </div>
@@ -122,24 +123,28 @@ export const SessionsPage = () => {
                             <button className="btn-chevron" onClick={handleClick}>
                                 <FaChevronDown />
                             </button>
-                            <button className="btn-booking">Boka</button>
-                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>X</button>
+                            <div className="buttons">
+                                <button className="btn-booking">Boka</button>
+                                <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>
+                                    <CgClose />
+                                </button>
+                            </div>
                         </div>
                     </div>
                     )
                 })}
-                      {showDeleteModal && (
-        <div id="delete-modal">
-          <div className='delete-modal-content'>
-            <h2>{getSessionInfo()?.title}</h2>
-            <p>Are you sure you want to delete this session?</p>
-            <div className='delete-modal-actions'>
-              <button className='delete-confirm' onClick={() => {handleDelete(sessionId);}}>Yes</button>
-              <button className='delete-cancel' onClick={closeDeleteModal}>No</button>
-            </div>
-          </div>
-        </div>
-      )}
+                {showDeleteModal && (
+                    <div id="delete-modal">
+                    <div className='delete-modal-content'>
+                        <h2>{getSessionInfo()?.title}</h2>
+                        <p>Are you sure you want to delete this session?</p>
+                        <div className='delete-modal-actions'>
+                        <button className='delete-confirm' onClick={() => {handleDelete(sessionId);}}>Yes</button>
+                        <button className='delete-cancel' onClick={closeDeleteModal}>No</button>
+                        </div>
+                    </div>
+                    </div>
+                )}
 
             </div>
         </>
