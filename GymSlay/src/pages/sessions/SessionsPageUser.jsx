@@ -43,7 +43,7 @@ export const SessionsPageUser = () => {
 
     if (loading) {
         return (
-            <div className="wrapper">
+            <div className="list-container">
                 <div className="message">Loading...</div>
             </div>
         )
@@ -51,7 +51,7 @@ export const SessionsPageUser = () => {
     
     if (error) {
         return (
-            <div className="wrapper">
+            <div className="list-container">
                 <div className="message error">Något gick fel... Försök igen senare.</div>
             </div>
         )
@@ -59,7 +59,7 @@ export const SessionsPageUser = () => {
 
     if (!sessions || sessions.length === 0) {
         return (
-            <div className="wrapper">
+            <div className="list-container">
                 <div className="message">Inga sessioner hittades</div>
             </div>
         )
