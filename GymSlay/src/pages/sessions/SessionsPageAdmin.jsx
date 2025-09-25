@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './sessionsPage.css'
 import { FaChevronDown } from 'react-icons/fa6';
-import { CgClose } from 'react-icons/cg';
 
 export const SessionsPageAdmin = () => {
     const [sessions, setSessions] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-  
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [sessionId, setSessionId] = useState(null);
+    const [error, setError] = useState(null);  
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [sessionId, setSessionId] = useState(null);
+    
 
-  const getSessionInfo = () => {
-    return sessions.find(session => session.id === sessionId);
-  };
+    const getSessionInfo = () => {
+        return sessions.find(session => session.id === sessionId);
+    };
 
     useEffect(() => {
         handleFetch();
@@ -106,11 +105,16 @@ export const SessionsPageAdmin = () => {
         <>
             <div className="wrapper">
                 {sessions.map(session => {
+                    const dateTime = new Date(session.date);
+                    const date = dateTime.toISOString().split("T")[0];
+                    const time = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
                     return (
                     <div key={session.id} className="card">
                         <img className="image" src="/src/assets/images/girl-training.jpg" alt="Girl training."></img>
                         <div className="card-content-group">
                             <div className="title">{session.title}</div>
+                            <div className="time">{date} {time}</div>
                             <div className="details-group">
                                 <div className="intensity">{session.intensity}</div>
                                 <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
@@ -124,9 +128,9 @@ export const SessionsPageAdmin = () => {
                                 <FaChevronDown />
                             </button>
                             <div className="buttons">
-                                <button className="btn-booking">Boka</button>
+                                <button className="btn-edit">Edit</button>
                                 <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>
-                                    <CgClose />
+                                    Delete
                                 </button>
                             </div>
                         </div>

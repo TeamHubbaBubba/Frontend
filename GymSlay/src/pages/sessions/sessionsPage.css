@@ -57,12 +57,14 @@
             align-items: center;
             gap: .5rem;
             margin-right: .7rem;
-            
-            .spots, .intensity {
-                font-size: .5rem;
-            }
 
-            .progress-bar {
+        }
+
+        .spots, .time {
+            font-size: .5rem;
+        }
+
+            /* .progress-bar {
                 min-width: 5rem;
                 height: .5rem;
                 background-color: var(--success);
@@ -74,8 +76,8 @@
                     background-color: var(--progress-bar-fill);
                     border-radius: .25rem 0 0 .25rem;
                 }
-            }
-        }
+            } */
+        
     }
 
     .buttons-group {
@@ -113,8 +115,8 @@
             transform: rotate(180deg);
         }
 
-        .btn-booking {
-            padding: .2em .8em .3em .8em;
+        .btn-booking, .btn-edit, .delete-btn {
+            padding: .5em .9em;
             background-color: var(--red-110);
             border: none;
             font-size: .62rem;;
@@ -122,6 +124,8 @@
             line-height: 100%;
             transition: all .2s ease-in-out;
             cursor: pointer;
+            outline: none;
+            border: none;
 
             &:hover {
                 background-color: var(--booking-btn-hover);
@@ -129,19 +133,9 @@
             }
         }
     }
-  .delete-btn{
-  width: 24px;
-  height: 24px;
-  background-color: var(--red-110);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-110);
-  outline: none;
-  border: none;
-  cursor: pointer;
 }
+
+
 
 #delete-modal{
   position: fixed;
