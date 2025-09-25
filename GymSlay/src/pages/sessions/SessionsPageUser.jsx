@@ -66,9 +66,13 @@ export const SessionsPageUser = () => {
     }
 
     return (
-        <div className="wrapper">
+        <div className="list-container">
             {sessions.map(session => {
                 const isExpanded = expandedCardId === session.id;
+                const dateTime = new Date(session.date);
+                const date = dateTime.toLocaleDateString([], { month: '2-digit', day: '2-digit' });
+                const time = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
                 return (
                     <div key={session.id} className={`card ${isExpanded ? "expanded" : ""}`}>
                         {!isExpanded && (
@@ -76,6 +80,7 @@ export const SessionsPageUser = () => {
                                 <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title} />
                                 <div className="card-content-group">
                                     <div className="title">{session.title}</div>
+                                    <div className="time">{date} kl: {time}</div>
                                     <div className="details-group">
                                         <div className="intensity">{session.intensity || "Medium"}</div>
                                         <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
