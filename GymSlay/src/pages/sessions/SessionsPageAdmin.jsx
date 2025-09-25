@@ -3,7 +3,7 @@ import './sessionsPage.css'
 import { FaChevronDown } from 'react-icons/fa6';
 import { CgClose } from 'react-icons/cg';
 
-export const SessionsPage = () => {
+export const SessionsPageAdmin = () => {
     const [sessions, setSessions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
