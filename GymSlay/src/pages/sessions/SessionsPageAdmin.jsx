@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './sessionsPage.css'
 import { FaChevronDown } from 'react-icons/fa6';
+import { API_URL } from '../../services/api';
 
 export const SessionsPageAdmin = () => {
     const [sessions, setSessions] = useState([]);
@@ -27,7 +28,7 @@ export const SessionsPageAdmin = () => {
         setError(null);
         
         try {
-            const response = await fetch('https://localhost:7067/api/sessions');
+            const response = await fetch(`${API_URL}/sessions`);
 
             if(!response.ok) {
                 console.log("Fetch failed", response.statusText);
