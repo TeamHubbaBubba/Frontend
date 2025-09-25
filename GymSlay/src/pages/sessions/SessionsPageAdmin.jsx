@@ -71,7 +71,7 @@ export const SessionsPageAdmin = () => {
 
         return (
             <div className="wrapper">
-                <div className="message">Inga sessioner hittades</div>
+                <div className="message">Inga sessioner hittades.</div>
             </div>
         )
     }
