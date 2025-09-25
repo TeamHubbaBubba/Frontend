@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './sessionsPage.css'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
+import { API_URL } from '../../services/api';
 
 export const SessionsPageUser = () => {
     const [sessions, setSessions] = useState([]);
@@ -21,7 +22,7 @@ export const SessionsPageUser = () => {
         setError(null);
         
         try {
-            const response = await fetch('https://localhost:7067/api/sessions');
+            const response = await fetch(`${API_URL}/sessions`);
 
             if(!response.ok) {
                 setError(response.statusText);
