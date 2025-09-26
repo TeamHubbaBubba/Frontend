@@ -134,7 +134,7 @@
     svg {
         transition: transform .2s ease-in-out;
     }
-
+}
 
 .btn-chevron.rotate svg {
     transform: rotate(180deg);
