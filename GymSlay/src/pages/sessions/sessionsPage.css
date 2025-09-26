@@ -99,22 +99,7 @@
 
     .spots, .time {
         font-size: .5rem;
-    }
-
-        /* .progress-bar {
-            min-width: 5rem;
-            height: .5rem;
-            background-color: var(--success);
-            border-radius: .25rem;
-            overflow: hidden;
-
-            .progress {
-                height: 100%;
-                background-color: var(--progress-bar-fill);
-                border-radius: .25rem 0 0 .25rem;
-            }
-        } */
-    
+    }  
 }
 
 .buttons-group {
@@ -149,7 +134,7 @@
     svg {
         transition: transform .2s ease-in-out;
     }
-}
+
 
 .btn-chevron.rotate svg {
     transform: rotate(180deg);
