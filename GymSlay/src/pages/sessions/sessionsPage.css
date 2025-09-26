@@ -36,7 +36,7 @@
 .card:not(.expanded) {
     height: 4.5rem;
     display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: auto 1fr auto;
     gap: .5rem;
     align-items: start;
     padding: .5rem;
@@ -87,7 +87,7 @@
     justify-content: space-between;
     gap: .25rem;
     overflow: hidden;
-
+  
     .details-group {
         display: flex;
         justify-content: space-between;
@@ -142,6 +142,8 @@
 
     &:hover {
         background-color: var(--chevron-btn-hover);
+
+     
     }
 
     svg {
