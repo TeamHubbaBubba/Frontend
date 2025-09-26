@@ -47,3 +47,41 @@
   background: var(--red-90);
   color: var(--accent-70);
 }
+
+/*css kod för just EditSessionsForm*/
+.edit-session-form {
+  max-width: 400px;
+  width: 70%;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--grey-80);
+  border: 1px solid rgba(255, 255, 255, 0.512);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0,0, 0.3);
+}
+
+.edit-form-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--accent-70);
+  margin-bottom: 1.5rem;
+}
+
+.edit-session-form .form-group label {
+  color: var(--accent-70);
+}
+
+.edit-btn-save {
+  background: linear-gradient(to right, #cc0000, #990000);
+  color: white;
+  width: 100%;
+  margin-top: 1rem;
+  font-weight: bold;
+  transition: backgorund 0.3s ease;
+}
+
+.edit-btn-save:hover {
+  background: linear-gradient(to right, #ff1a1a, #b30000);
+
+}
