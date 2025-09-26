@@ -62,12 +62,13 @@ export const SessionsPageAdmin = () => {
         }
     }
 
-    if (loading) return <div className="wrapper"><div className="message">Loading...</div></div>;
-    if (error) return <div className="wrapper"><div className="message error">Något gick fel... Försök igen senare.</div></div>;
-    if (!sessions || sessions.length === 0) return <div className="wrapper"><div className="message">Inga sessioner hittades.</div></div>;
+    if (loading) return <div className="list-container"><div className="message">Loading...</div></div>;
+    if (error) return <div className="list-container"><div className="message error">Något gick fel... Försök igen senare.</div></div>;
+    if (!sessions || sessions.length === 0) return <div className="list-container"><div className="message">Inga sessioner hittades.</div></div>;
+
 
     return (
-        <div className="wrapper">
+        <div className="list-container">
             {sessions.map(session => {
                 const dateTime = new Date(session.date);
                 const date = dateTime.toISOString().split("T")[0];
@@ -81,7 +82,7 @@ export const SessionsPageAdmin = () => {
                                 <img className="image" src="/src/assets/images/girl-training.jpg" alt="Girl training." />
                                 <div className="card-content-group">
                                     <div className="title">{session.title}</div>
-                                    <div className="time">{date} {time}</div>
+                                    <div className="time">{date} kl: {time}</div>
                                     <div className="details-group">
                                         <div className="intensity">{session.intensity}</div>
                                         <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
@@ -97,7 +98,8 @@ export const SessionsPageAdmin = () => {
                                     </div>
                                 </div>
                             </>
-                        )}
+                          )}
+
 
                         
                         {isExpanded && (
@@ -108,7 +110,7 @@ export const SessionsPageAdmin = () => {
                                     </button>
                                     <div className="expanded-info">
                                         <div className="expanded-title">{session.title}</div>
-                                        <div className="expanded-time">Date: {date} {time}</div>
+                                        <div className="expanded-time">Date: {date} kl: {time}</div>
                                         <div className="expanded-intensity">Intensity: {session.intensity}</div>
                                     </div>
                                 </div>
