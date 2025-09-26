@@ -1,6 +1,6 @@
 .session-form {
+  width: 100%;
   max-width: 400px;
-  margin: 2rem auto;
   padding: 1rem;
   background: var(--grey-80);
   border-radius: 8px;

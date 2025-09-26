@@ -104,7 +104,7 @@ export const SessionsPage = () => {
 
     return (
         <>
-            <div className="wrapper">
+            <div className="list-container">
                 {sessions.map(session => {
                     return (
                     <div key={session.id} className="card">
