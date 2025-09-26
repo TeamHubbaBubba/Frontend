@@ -5,6 +5,7 @@ import { createSession } from "../../services/api"
 export const CreateSessionForm = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
+  const [intensity, setIntensity] = useState("")
   const [sessionDate, setSessionDate] = useState("")
   const [maxParticipants, setMaxParticipants] = useState("")
 
@@ -14,8 +15,9 @@ export const CreateSessionForm = () => {
     const payload = {
       title,
       description,
+      intensity,
       maxParticipants: Number(maxParticipants),
-      sessionDate
+      Date: new Date(sessionDate).toISOString()
     }
 
     try {
@@ -69,6 +71,18 @@ export const CreateSessionForm = () => {
           value={sessionDate}
           onChange={(e) => setSessionDate(e.target.value)}
         />
+        </div>
+
+        <div className="form-group">  
+          <label htmlFor="intensity">Intensitet</label>
+          <input 
+            type="text" 
+            id="intensity" 
+            name="intensity" 
+            className="form-input" 
+            value={intensity}
+            onChange={(e) => setIntensity(e.target.value)}
+          />
         </div>
 
         <div className="form-group">
