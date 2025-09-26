@@ -47,3 +47,15 @@
   background: var(--red-90);
   color: var(--accent-70);
 }
+
+/* Error message styling */
+
+.error {
+  border: 2px solid var(--error);
+}
+
+.error-text {
+  color: var(--error);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
