@@ -4,10 +4,17 @@
     if (!title.trim()) errors.title = "Titel är obligatoriskt";
     if (!description.trim()) errors.description = "Beskrivning är obligatoriskt";
 
-    if (!intensity.trim()) errors.intensity = "Intensitet är obligatoriskt";
-    if (!sessionDate) errors.sessionDate = "Datum och tid måste anges";
-    else if (new Date(sessionDate) < new Date()) 
-      errors.sessionDate =  "Datum och tid måste vara i framtiden";
+
+    const now = new Date();
+    const selected = new Date(sessionDate);
+
+    if (!sessionDate) {
+      errors.sessionDate = "Datum och tid måste anges";
+    } else if (isNaN(selected.getTime())) {
+      errors.sessionDate = "Ogiltigt datum/tid"
+    } else if (selected <= now) {
+      errors.sessionDate = "Datum och tid måste vara i framtiden";
+    }
 
     const mp = Number(maxParticipants);
     if (!mp) errors.maxParticipants = "Ange max antal platser";
