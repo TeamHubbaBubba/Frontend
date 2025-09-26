@@ -87,7 +87,7 @@
     justify-content: space-between;
     gap: .25rem;
     overflow: hidden;
-
+  
     .details-group {
         display: flex;
         justify-content: space-between;
@@ -142,6 +142,8 @@
 
     &:hover {
         background-color: var(--chevron-btn-hover);
+
+     
     }
 
     svg {
@@ -170,8 +172,6 @@
         box-shadow: 0 0 3px var(--booking-btn-hover);
     }
 }
-
-
 
 
 #delete-modal{
