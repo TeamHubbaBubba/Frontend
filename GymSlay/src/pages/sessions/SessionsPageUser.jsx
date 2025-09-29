@@ -47,7 +47,6 @@ export const SessionsPageUser = () => {
     if (error) return <div className="list-container"><div className="message error">Något gick fel... Försök igen senare.</div></div>;
     if (!sessions || sessions.length === 0) return <div className="list-container"><div className="message">Inga sessioner hittades.</div></div>;
 
-
     return (
         <div className="sessions-page">
             <div className="list-container">
@@ -107,6 +106,11 @@ export const SessionsPageUser = () => {
                         </div>
                     );
                 })}
+            </div>
+
+            <div className="booking-info">
+                <p>Ring för att boka:</p> 
+                <strong>054-123 456</strong>
             </div>
         </div>
     )
