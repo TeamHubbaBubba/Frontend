@@ -73,7 +73,7 @@
 /* Buttons cards */
 
 .btn-booking, .btn-edit, .delete-btn {
-    padding: .6em .9em .4em .9em;
+    padding: .4em .9em;
     border: none;
     font-size: .62rem;;
     border-radius: .6em;
@@ -81,9 +81,11 @@
     transition: all .2s ease-in-out;
     cursor: pointer;
     outline: none;
-    border: none;
+    border: none;    
+}
 
-    
+.btn-booking {
+    display: none;
 }
 
 .delete-btn {

@@ -70,84 +70,86 @@ export const SessionsPageAdmin = () => {
 
 
     return (
-        <div className="sessions-page-admin">
-        <div className="list-container">
-            {sessions.map(session => {
-                const dateTime = new Date(session.date);
-                const date = dateTime.toLocaleDateString([], { month: '2-digit', day: '2-digit' });
-                const time = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                const isExpanded = expandedCardId === session.id;
+        <div className="sessions-page">
+            <div className="list-container">
+                {sessions.map(session => {
+                    const dateTime = new Date(session.date);
+                    const date = dateTime.toLocaleDateString([], { month: '2-digit', day: '2-digit' });
+                    const time = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    const isExpanded = expandedCardId === session.id;
 
-                return (
-                    <div key={session.id} className={`card ${isExpanded ? "expanded" : ""}`}>
-                        {/* Chevron-knapp som alltid är synlig */}
-                        <button className={`btn-chevron ${isExpanded ? "rotate" : ""}`} onClick={() => toggleExpand(session.id)}>
-                            <FaChevronDown />
-                        </button>
+                    return (
+                        <div key={session.id} className={`card ${isExpanded ? "expanded" : ""}`}>
+                            {/* Chevron-knapp som alltid är synlig */}
+                            <button className={`btn-chevron ${isExpanded ? "rotate" : ""}`} onClick={() => toggleExpand(session.id)}>
+                                <FaChevronDown />
+                            </button>
 
-                        {!isExpanded && (
-                            <>
-                                <img className="image" src="/src/assets/images/girl-training.jpg" alt="Girl training." />
-                                <div className="card-content-group">
-                                    <div className="title">{session.title}</div>
-                                    <div className="time">{date} kl: {time}</div>
-                                    <div className="details-group">
-                                        <div className="intensity">{session.intensity}</div>
-                                        <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
-                                    </div>
-                                </div>
-                                <div className="buttons-group">
-                                    <div className="buttons">
-                                        <button className="btn-edit">Edit</button>
-                                        <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
-                                    </div>
-                                </div>
-                            </>
-                          )}
-
-                        {isExpanded && (
-                            <>
-                                <div className="expanded-top">
-                                    <img className="image" src="/src/assets/images/girl-training.jpg" alt="Girl training." />
+                            {!isExpanded && (
+                                <>
+                                    <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
                                     <div className="card-content-group">
                                         <div className="title">{session.title}</div>
                                         <div className="time">{date} kl: {time}</div>
                                         <div className="details-group">
-                                            <div className="intensity">{session.intensity}</div>
+                                            <div className="intensity">{session.intensity || "Medium"}</div>
+                                            <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div className="description">{session.description}</div>
-
-                                <div className="expanded-bottom">
-                                    <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
-                                    <div className="buttons">
-                                        <button className="btn-edit">Edit</button>
-                                        <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                    <div className="buttons-group">
+                                        <div className="buttons">
+                                            <button className="btn-edit">Edit</button>
+                                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                );
-            })}
+                                </>
+                            )}
 
-            {showDeleteModal && (
-                <div id="delete-modal">
-                    <div className='delete-modal-content'>
-                        <h2>{getSessionInfo()?.title}</h2>
-                        <p>Are you sure you want to delete this session?</p>
-                        <div className='delete-modal-actions'>
-                            <button className='delete-confirm' onClick={() => handleDelete(sessionId)}>Yes</button>
-                            <button className='delete-cancel' onClick={closeDeleteModal}>No</button>
+                            {isExpanded && (
+                                <>
+                                    <div className="expanded-top">
+                                        <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
+                                        <div className="card-content-group">
+                                            <div className="title">{session.title}</div>
+                                            <div className="time">{date} kl: {time}</div>
+                                            <div className="details-group">
+                                                <div className="intensity">{session.intensity}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="description">{session.description}</div>
+
+                                    <div className="expanded-bottom">
+                                        <div className="spots">
+                                            Platser: {session.currentParticipants}/{session.maxParticipants}
+                                        </div>
+                                        <div className="buttons">
+                                            <button className="btn-edit">Edit</button>
+                                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    );
+                })}
+
+                {showDeleteModal && (
+                    <div id="delete-modal">
+                        <div className='delete-modal-content'>
+                            <h2>{getSessionInfo()?.title}</h2>
+                            <p>Are you sure you want to delete this session?</p>
+                            <div className='delete-modal-actions'>
+                                <button className='delete-confirm' onClick={() => handleDelete(sessionId)}>Yes</button>
+                                <button className='delete-cancel' onClick={closeDeleteModal}>No</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )}
 
-        </div>
+            </div>
             <NavLink to="/createsessions" className="add-session-btn">Lägg till nytt pass</NavLink>
-    </div>
-        );
+        </div>
+    );
 };
