@@ -70,6 +70,7 @@ export const SessionsPageAdmin = () => {
 
 
     return (
+        <div className="sessions-page-admin">
         <div className="list-container">
             {sessions.map(session => {
                 const dateTime = new Date(session.date);
@@ -79,6 +80,11 @@ export const SessionsPageAdmin = () => {
 
                 return (
                     <div key={session.id} className={`card ${isExpanded ? "expanded" : ""}`}>
+                        {/* Chevron-knapp som alltid är synlig */}
+                        <button className={`btn-chevron ${isExpanded ? "rotate" : ""}`} onClick={() => toggleExpand(session.id)}>
+                            <FaChevronDown />
+                        </button>
+
                         {!isExpanded && (
                             <>
                                 <img className="image" src="/src/assets/images/girl-training.jpg" alt="Girl training." />
@@ -91,9 +97,6 @@ export const SessionsPageAdmin = () => {
                                     </div>
                                 </div>
                                 <div className="buttons-group">
-                                    <button className="btn-chevron" onClick={() => toggleExpand(session.id)}>
-                                        <FaChevronDown />
-                                    </button>
                                     <div className="buttons">
                                         <button className="btn-edit">Edit</button>
                                         <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
@@ -102,13 +105,10 @@ export const SessionsPageAdmin = () => {
                             </>
                           )}
 
-
-                        
                         {isExpanded && (
                             <>
                                 <div className="expanded-top">
                                     <img className="image" src="/src/assets/images/girl-training.jpg" alt="Girl training." />
-
                                     <div className="card-content-group">
                                         <div className="title">{session.title}</div>
                                         <div className="time">{date} kl: {time}</div>
@@ -116,9 +116,6 @@ export const SessionsPageAdmin = () => {
                                             <div className="intensity">{session.intensity}</div>
                                         </div>
                                     </div>
-                                    <button className="btn-chevron rotate" onClick={() => toggleExpand(session.id)}>
-                                        <FaChevronDown />
-                                    </button>
                                 </div>
 
                                 <div className="description">{session.description}</div>
@@ -149,7 +146,8 @@ export const SessionsPageAdmin = () => {
                 </div>
             )}
 
-            <NavLink to="/src/pages/sessions/CreateSessionPage.jsx" className="add-session-btn">Add New Session</NavLink>
         </div>
-    );
+            <NavLink to="/createsessions" className="add-session-btn">Lägg till nytt pass</NavLink>
+    </div>
+        );
 };

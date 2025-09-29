@@ -11,6 +11,33 @@
     transform: rotate(90deg);
 }
 
+/* Add session */
+
+.add-session-btn {
+    width: 100%;
+    padding: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--add-btn-background);
+    border: none;
+    font-size: .75rem;
+    font-weight: 500;
+    border-radius: .6em;
+    line-height: 100%;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    color: var(--grey-20);
+    text-decoration: none;
+}
+
+.add-session-btn:hover {
+    background-color: var(--grey-90);
+    box-shadow: 0 0 3px var(--grey-90);
+}
+
 
 
 
@@ -46,8 +73,7 @@
 /* Buttons cards */
 
 .btn-booking, .btn-edit, .delete-btn {
-    padding: .5em .9em;
-    background-color: var(--red-110);
+    padding: .6em .9em .4em .9em;
     border: none;
     font-size: .62rem;;
     border-radius: .6em;
@@ -57,8 +83,23 @@
     outline: none;
     border: none;
 
+    
+}
+
+.delete-btn {
+    background-color: var(--red-btn-background);
+
     &:hover {
-        background-color: var(--booking-btn-hover);
-        box-shadow: 0 0 3px var(--booking-btn-hover);
+        background-color: var(--red-btn-hover);
+        box-shadow: 0 0 3px var(--red-btn-hover);
+    }
+}
+
+.btn-edit, .btn-booking {
+    background-color: var(--grey-btn-background);
+
+    &:hover {
+        background-color: var(--grey-btn-hover);
+        box-shadow: 0 0 3px var(--grey-btn-hover);
     }
 }
