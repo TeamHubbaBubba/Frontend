@@ -10,3 +10,55 @@
 .menu-active {
     transform: rotate(90deg);
 }
+
+
+
+
+/* Chevron */
+
+.btn-chevron {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: var(--chevron-btn-background);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-chevron:hover {
+    background-color: var(--chevron-btn-hover);
+}
+
+.btn-chevron svg {
+    transition: transform 0.3s ease-in-out !important;
+    transform-origin: center !important;
+}
+
+.btn-chevron.rotate svg {
+    transform: rotate(180deg) !important;
+}
+
+
+/* Buttons cards */
+
+.btn-booking, .btn-edit, .delete-btn {
+    padding: .5em .9em;
+    background-color: var(--red-110);
+    border: none;
+    font-size: .62rem;;
+    border-radius: .6em;
+    line-height: 100%;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    outline: none;
+    border: none;
+
+    &:hover {
+        background-color: var(--booking-btn-hover);
+        box-shadow: 0 0 3px var(--booking-btn-hover);
+    }
+}

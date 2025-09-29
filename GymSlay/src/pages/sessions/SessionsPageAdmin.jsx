@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './sessionsPage.css';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
+import '../../components/buttons/buttons.css';
+import { FaChevronDown } from 'react-icons/fa6';
 import { API_URL } from '../../services/api';
+import { NavLink } from 'react-router';
 
 export const SessionsPageAdmin = () => {
     const [sessions, setSessions] = useState([]);
@@ -71,7 +73,7 @@ export const SessionsPageAdmin = () => {
         <div className="list-container">
             {sessions.map(session => {
                 const dateTime = new Date(session.date);
-                const date = dateTime.toISOString().split("T")[0];
+                const date = dateTime.toLocaleDateString([], { month: '2-digit', day: '2-digit' });
                 const time = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                 const isExpanded = expandedCardId === session.id;
 
@@ -89,7 +91,7 @@ export const SessionsPageAdmin = () => {
                                     </div>
                                 </div>
                                 <div className="buttons-group">
-                                    <button className={`btn-chevron ${isExpanded ? "rotate" : ""}`} onClick={() => toggleExpand(session.id)}>
+                                    <button className="btn-chevron" onClick={() => toggleExpand(session.id)}>
                                         <FaChevronDown />
                                     </button>
                                     <div className="buttons">
@@ -103,28 +105,32 @@ export const SessionsPageAdmin = () => {
 
                         
                         {isExpanded && (
-                            <div className="expanded-content">
+                            <>
                                 <div className="expanded-top">
-                                    <button className="btn-chevron expanded-close" onClick={() => toggleExpand(session.id)}>
-                                        <FaChevronUp />
-                                    </button>
-                                    <div className="expanded-info">
-                                        <div className="expanded-title">{session.title}</div>
-                                        <div className="expanded-time">Date: {date} kl: {time}</div>
-                                        <div className="expanded-intensity">Intensity: {session.intensity}</div>
+                                    <img className="image" src="/src/assets/images/girl-training.jpg" alt="Girl training." />
+
+                                    <div className="card-content-group">
+                                        <div className="title">{session.title}</div>
+                                        <div className="time">{date} kl: {time}</div>
+                                        <div className="details-group">
+                                            <div className="intensity">{session.intensity}</div>
+                                        </div>
                                     </div>
+                                    <button className="btn-chevron rotate" onClick={() => toggleExpand(session.id)}>
+                                        <FaChevronDown />
+                                    </button>
                                 </div>
 
-                                <div className="expanded-description">{session.description}</div>
+                                <div className="description">{session.description}</div>
 
                                 <div className="expanded-bottom">
-                                    <div className="expanded-spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
+                                    <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
                                     <div className="buttons">
                                         <button className="btn-edit">Edit</button>
                                         <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
                                     </div>
                                 </div>
-                            </div>
+                            </>
                         )}
                     </div>
                 );
@@ -142,6 +148,8 @@ export const SessionsPageAdmin = () => {
                     </div>
                 </div>
             )}
+
+            <NavLink to="/src/pages/sessions/CreateSessionPage.jsx" className="add-session-btn">Add New Session</NavLink>
         </div>
     );
 };
