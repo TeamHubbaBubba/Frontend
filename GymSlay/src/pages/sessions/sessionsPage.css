@@ -28,6 +28,19 @@
     background-color: var(--grey-50);
 }
 
+.booking-info {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--accent-100);
+    color: var(--grey-100);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .5em 1em;
+    border-radius: 1.5rem;
+    box-shadow: 0 0 5px 5px var(--accent-100);
+}
 
 /* Cards */
 
@@ -49,7 +62,7 @@
 
 .card:not(.expanded) {
     display: grid;
-    grid-template-columns: auto auto 1fr auto;
+    grid-template-columns: auto 1fr auto;
     gap: .5rem;
     align-items: start;
 }
@@ -131,7 +144,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: center;
+    align-items: end;
 }
 
 .buttons {
