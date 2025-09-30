@@ -4,7 +4,7 @@ import { Header } from "./components/header/Header"
 import { MainLayout } from "./layouts/MainLayout"
 import { SessionsPage } from "./pages/sessions/SessionsPage"
 import { CreateSessionPage } from "./pages/sessions/CreateSessionPage"
-import UserBookingsPage from "./pages/sessions/UserBookingsPage";
+import { UserBookingsPage } from "./pages/sessions/UserBookingsPage"
 
 function App() {
   return (
