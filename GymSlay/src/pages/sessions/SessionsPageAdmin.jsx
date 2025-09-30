@@ -113,7 +113,7 @@ export const SessionsPageAdmin = () => {
                                             <div className="title">{session.title}</div>
                                             <div className="time">{date} kl: {time}</div>
                                             <div className="details-group">
-                                                <div className="intensity">{session.intensity}</div>
+                                                <div className="intensity">{session.intensity || "Medium"}</div>
                                             </div>
                                         </div>
                                     </div>
