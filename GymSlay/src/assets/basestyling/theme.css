@@ -20,6 +20,11 @@
     --success: #00A82D;
     --warning: #FFC107;
     --error: #D32F2E;
+    --primary: var(--accent-100);
+
+    /* RGB versions for rgba() usage */
+    --error-rgb: 211, 47, 46;
+    --primary-rgb: 252, 201, 0;
 
 
 
