@@ -1,12 +1,170 @@
+.menu-container {
+  position: relative;
+  display: inline-block;
+}
+
 .btn-menu {
-    background-color: transparent;
-    border: none;
-    transition: all 0.2s ease-in-out;
-    height: 3.4rem;
-    width: 3.4rem;
-    cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  height: 3.4rem;
+  width: 3.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-menu img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-menu.menu-active {
+  transform: rotate(90deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 3.6rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 0.5rem 0;
+  min-width: 160px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-icon {
+  margin-right: 8px;
+  vertical-align: middle;
+  font-size: 1rem;
+}
+
+.menu-item {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.menu-item:hover {
+  background: #f2f2f2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .menu-active {
     transform: rotate(90deg);
+}
+
+/* Add session */
+
+.add-session-btn {
+    width: 100%;
+    max-width: 400px;
+    padding: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--add-btn-background);
+    border: none;
+    font-size: .75rem;
+    font-weight: 500;
+    border-radius: .6em;
+    line-height: 100%;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    color: var(--grey-20);
+    text-decoration: none;
+}
+
+.add-session-btn:hover {
+    background-color: var(--grey-90);
+    box-shadow: 0 0 3px var(--grey-90);
+}
+
+
+
+/* Chevron */
+
+.btn-chevron {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: var(--chevron-btn-background);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-chevron:hover {
+    background-color: var(--chevron-btn-hover);
+}
+
+.btn-chevron svg {
+    transition: transform 0.3s ease-in-out !important;
+    transform-origin: center !important;
+}
+
+.btn-chevron.rotate svg {
+    transform: rotate(180deg) !important;
+}
+
+/* Buttons cards */
+
+.btn-booking, .btn-edit, .delete-btn {
+    padding: .4em .9em;
+    border: none;
+    font-size: .62rem;;
+    border-radius: .6em;
+    line-height: 100%;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    outline: none;
+    border: none;    
+}
+
+.btn-booking {
+    display: none;
+}
+
+.delete-btn {
+    background-color: var(--red-btn-background);
+
+    &:hover {
+        background-color: var(--red-btn-hover);
+        box-shadow: 0 0 3px var(--red-btn-hover);
+    }
+}
+
+.btn-edit, .btn-booking {
+    background-color: var(--grey-btn-background);
+
+    &:hover {
+        background-color: var(--grey-btn-hover);
+        box-shadow: 0 0 3px var(--grey-btn-hover);
+    }
 }
