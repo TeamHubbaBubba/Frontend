@@ -4,6 +4,7 @@ import { FaCalendarAlt } from "react-icons/fa"
 import menuIcon from '../../assets/images/MenuBtn.svg'
 import './buttons.css'
 import { useNavigate } from 'react-router-dom'
+import { API_URL } from '../../services/api'
 
 export const MenuBtn = () => {
   const [open, setOpen] = useState(false)
@@ -13,7 +14,7 @@ export const MenuBtn = () => {
 
   const handleLogout = async () => {
   try {
-    const response = await fetch("https://localhost:7067/api", {
+    const response = await fetch(`${API_URL}/auth/signout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +26,7 @@ export const MenuBtn = () => {
       localStorage.removeItem('session')
       localStorage.removeItem('token')
       setOpen(false)
-
+      navigate('/signin')
       // testing
       console.log("Logout successful")
     } else {
