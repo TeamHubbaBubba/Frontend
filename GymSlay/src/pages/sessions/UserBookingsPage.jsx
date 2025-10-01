@@ -20,9 +20,13 @@ export const UserBookingsPage = () => {
     
     try {
       // const response = await fetch('https://localhost:7067/api/bookings');
+
+      // Simulated response to test functionality
       const simulatedResponse = {
       ok: true,
       json: async () => ({
+        // data: []
+
         data: [
           { id: 1, title: "Morning Cardio", date: "2025-10-02", time: "07:00 - 08:00" },
           { id: 2, title: "Strength Training", date: "2025-10-03", time: "09:00 - 10:00" }
@@ -30,6 +34,7 @@ export const UserBookingsPage = () => {
       })
     };
 
+    // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 2000));
 
       // if(!response.ok) {
