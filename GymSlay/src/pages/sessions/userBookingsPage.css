@@ -27,3 +27,9 @@
   gap: 1rem;
   font-size: .7rem;
 }
+
+@media (min-width: 1400px) {
+  .no-bookings {
+    max-width: 25rem;
+  }
+}
