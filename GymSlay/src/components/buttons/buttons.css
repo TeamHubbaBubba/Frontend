@@ -74,7 +74,7 @@
 .btn-booking, .btn-edit, .delete-btn {
     padding: .4em .9em;
     border: none;
-    font-size: .62rem;;
+    font-size: .62rem;
     border-radius: .6em;
     line-height: 100%;
     transition: all .2s ease-in-out;
@@ -83,8 +83,23 @@
     border: none;    
 }
 
-.btn-booking {
-    display: none;
+.btn-booking-big {
+    border: none;
+    font-size: 1.2rem;
+    border-radius: .6em;
+    line-height: 100%;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    outline: none;  
+    width: 90%;
+    padding: .6em 1em;
+    background-color: var(--grey-btn-background);
+    margin-top: .3rem;
+    
+    &:hover {
+        background-color: var(--grey-btn-hover);
+        box-shadow: 0 0 3px var(--grey-btn-hover);
+    }
 }
 
 .delete-btn {
