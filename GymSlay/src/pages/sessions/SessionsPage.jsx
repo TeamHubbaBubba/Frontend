@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './sessionsPage.css'
 import { FaChevronDown } from 'react-icons/fa6';
 import { CgClose } from 'react-icons/cg';
+import { useNavigate } from "react-router";
 
 export const SessionsPage = () => {
     const [sessions, setSessions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
   
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [sessionId, setSessionId] = useState(null);
@@ -125,6 +128,7 @@ export const SessionsPage = () => {
                             </button>
                             <div className="buttons">
                                 <button className="btn-booking">Boka</button>
+                                <button className="btn-edit" onClick={() => navigate(`/editsessions/${session.id}`)}>Edit</button>
                                 <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>
                                     <CgClose />
                                 </button>
