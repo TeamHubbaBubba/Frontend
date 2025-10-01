@@ -47,7 +47,7 @@ const EventCard = ({ session }) => {
           </div>
           <p className="event-description">{session.description}</p>
 
-          {/* Visuell progressbar för info */}
+          
           <div className="progress-wrapper">
             <div className="progress-bar">
               <div
