@@ -1,4 +1,4 @@
- export function validate({ title, description, sessionDate, maxParticipants }) {
+ export function validate({ title, description, intensity, sessionDate, maxParticipants }) {
     const errors = {};
 
     if (!title.trim()) errors.title = "Titel är obligatoriskt";

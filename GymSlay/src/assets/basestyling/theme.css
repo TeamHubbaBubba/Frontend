@@ -20,11 +20,6 @@
     --success: #00A82D;
     --warning: #FFC107;
     --error: #D32F2E;
-    --primary: var(--accent-100);
-
-    /* RGB versions for rgba() usage */
-    --error-rgb: 211, 47, 46;
-    --primary-rgb: 252, 201, 0;
 
 
 
@@ -35,11 +30,6 @@
     --chevron-btn-background: var(--grey-30);
     --chevron-btn-hover: var(--grey-100);
 
-    --grey-btn-background: var(--grey-100);
-    --grey-btn-hover: var(--grey-30);
-
-    --add-btn-background: var(--grey-80);
-
-    --red-btn-background: var(--red-110);
-    --red-btn-hover: var(--error);
+    --booking-btn-background: var(--red-110);
+    --booking-btn-hover: var(--error);
 }

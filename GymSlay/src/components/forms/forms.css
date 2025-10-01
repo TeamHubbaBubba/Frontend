@@ -6,14 +6,6 @@
   border-radius: 8px;
 }
 
-.sessions-form {
-  width: 100%;
-  max-width: 400px;
-  padding: 1rem;
-  background: var(--grey-80);
-  border-radius: 8px;
-}
-
 .form-title {
   font-size: 1.5rem;
   margin-bottom: 1rem;
@@ -28,50 +20,40 @@
 
 .form-group label {
   margin-bottom: 0.5rem;
-  font-weight: bold;
+  font-weight: 500;
 }
 
-.form-input {
+.form-input,
+.form-textarea {
   padding: 0.5rem;
-  border: 1px solid var(--grey-60);
+  border: 1px solid var(--grey-50);
   border-radius: 4px;
-  font-size: 1rem;
-  background: var(--grey-100);
-  color: var(--text-primary);
 }
 
-.form-input:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.1);
-}
-
-.form-input.error-box {
-  border-color: var(--error);
-  background-color: rgba(var(--error-rgb), 0.1);
-}
-
-.error-text {
-  color: var(--error);
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-  margin-bottom: 0;
-}
-
-.btn-submit {
-  width: 100%;
-  padding: 0.75rem;
-  background: var(--primary);
-  color: white;
+.btn {
+  padding: 0.6rem 1rem;
+  margin-top: 1rem;
   border: none;
   border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.2s;
+  width: 100%;
 }
 
-.btn-submit:hover {
-  background: var(--primary-dark, var(--primary));
-  opacity: 0.9;
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn-primary {
+  background: var(--red-90);
+  color: var(--accent-70);
+}
+
+.error-box { 
+  border: 2px solid var(--error);
+}
+.error-text { 
+  color: var(--error); 
+  font-size: 0.8rem; 
+  margin-top: 4px; 
+  display:block; 
 }
