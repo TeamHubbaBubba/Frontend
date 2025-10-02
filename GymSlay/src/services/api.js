@@ -11,3 +11,17 @@ export async function createSession(payload) {
     })
     return response
 }
+
+export async function bookSession(id) {
+  return fetch(`${API_URL}/bookings/sessions/${id}/bookings`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" }
+  });
+}
+
+export async function getSession(id) {
+  return fetch(`${API_URL}/sessions/${id}`, {
+    credentials: "include"
+  });
+}

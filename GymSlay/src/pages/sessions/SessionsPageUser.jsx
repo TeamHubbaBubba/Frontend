@@ -2,13 +2,51 @@ import React, { useEffect, useState } from 'react'
 import './sessionsPage.css'
 import '../../components/buttons/buttons.css';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
-import { API_URL } from '../../services/api';
+import { API_URL, bookSession, getSession } from '../../services/api';
 
 export const SessionsPageUser = () => {
     const [sessions, setSessions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [expandedCardId, setExpandedCardId] = useState(null);
+    const [bookedSessions, setBookedSessions] = useState([]); // id:n för bokade pass
+    const [success, setSuccess] = useState(null);
+
+    async function handleBook(id) {
+        try {
+            setLoading(true);
+            setError(null);
+
+            const result = await bookSession(id);
+            let data = null;
+
+            try { data = await result.json(); } catch {}
+
+            if (result.status === 200 && data?.success === true) {
+                setBookedSessions(prev => [...prev, id]); // Lägg till id för bokat pass
+                setSuccess("Passet är bokat!");
+
+                try {
+                    const refreshed = await getSession(id);
+                    if (refreshed.ok) {
+                        const freshJson = await refreshed.json();
+                        const fresh = freshJson && freshJson.data ? freshJson.data : freshJson;
+                        setSessions(prev => prev.map(s => (s.id === id ? fresh : s)));
+                    }
+                } catch {}
+            } else if (result.status === 400 && data?.success === false) {
+                setError("Kunde inte boka passet.");
+            } else if (result.status === 401) {
+                setError("Du måste vara inloggad för att boka.");
+            } else {
+                setError("Något gick fel, försök igen.");
+            }
+        } catch (error) {
+            setError("Nätverksfel, försök igen.");
+        } finally {
+            setLoading(false);
+        }
+    }
 
     useEffect(() => {
         handleFetch();
@@ -23,7 +61,9 @@ export const SessionsPageUser = () => {
         setError(null);
         
         try {
-            const response = await fetch(`${API_URL}/sessions`);
+            const response = await fetch(`${API_URL}/sessions`, {
+                credentials: "include"
+            });
 
             if(!response.ok) {
                 setError(response.statusText);
@@ -55,6 +95,8 @@ export const SessionsPageUser = () => {
                     const dateTime = new Date(session.date);
                     const date = dateTime.toLocaleDateString([], { month: '2-digit', day: '2-digit' });
                     const time = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    const isFull = session.currentParticipants >= session.maxParticipants;
+                    const isBooked = bookedSessions.includes(session.id);
 
                     return (
                         <div key={session.id} className={`card ${isExpanded ? "expanded" : ""}`}>
@@ -76,7 +118,11 @@ export const SessionsPageUser = () => {
                                     </div>
                                     <div className="buttons-group">
                                         <div className="buttons">
-                                            <button className="btn-booking">Boka</button>
+                                            <button className="btn-booking" onClick={() => handleBook(session.id)}
+                                                disabled={isFull || loading || isBooked}
+                                            >
+                                                {isFull ? "Fullbokat" : isBooked ? "Bokad" : loading ? "Bokar..." : "Boka"}
+                                            </button>
                                         </div>
                                     </div>
                                 </>
@@ -98,8 +144,21 @@ export const SessionsPageUser = () => {
                                     <div className="expanded-bottom">
                                         <div className="spots">
                                             Platser: {session.currentParticipants}/{session.maxParticipants}
+                                        </div> 
+                                    </div>
+
+                                    {error && <p className="error-text">{error}</p>}
+                                    {isBooked && <p className="success-text">Passet är bokat! Slay!</p>}
+                                    <div>
+                                        <div className="buttons">
+                                            <button 
+                                                className="btn-booking-big"
+                                                onClick={() => handleBook(session.id)}
+                                                disabled={isFull || loading || isBooked}
+                                            >
+                                                {isFull ? "Fullbokat" : isBooked ? "Bokad" : loading ? "Bokar..." : "Boka"}
+                                            </button>
                                         </div>
-                                        <button className="btn-booking">Boka</button>
                                     </div>
                                 </>
                             )}
