@@ -1,13 +1,26 @@
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 2.1rem 2rem;
     background-color: var(--grey-80);
-    height: 3.6rem;
     width: 100%;
+    padding: .7rem 1rem .5rem 1rem;
 }
 
+.navbar-spacer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    @media (min-width: 768px) {
+        max-width: 681px;;
+    }
+
+    @media (min-width: 1024px) {
+        max-width: 1024px;
+    }
+}
 .logo {
     height: 3.25rem;
     width: 5.5rem;
