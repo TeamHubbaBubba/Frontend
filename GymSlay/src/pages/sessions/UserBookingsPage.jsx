@@ -2,57 +2,52 @@ import React, { useEffect, useState } from 'react'
 import './UserBookingsPage.css'
 
 export const UserBookingsPage = () => {
-  // const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [bookings, setBookings] = useState([
-    { id: 1, title: "Morning Cardio", date: "2025-10-02", time: "07:00 - 08:00" },
-    { id: 2, title: "Strength Training", date: "2025-10-03", time: "09:00 - 10:00" }
-  ])
 
   useEffect(() => {
     handleFetch();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem
+  })
+
+  const formatDate = (string) => {
+    const date = new Date(string);
+    const dateSection = date.toLocaleDateString('en-GB', {
+      month: 'numeric',
+      day: 'numeric',
+      year: 'numeric'
+    });
+    const timeSection = date.toLocaleTimeString('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    return `${dateSection} - ${timeSection}`;
+  }
 
   async function handleFetch() {
     setLoading(true);
     setError(null);
     
     try {
-      // const response = await fetch('https://localhost:7067/api/bookings');
+      const response = await fetch('https://localhost:7067/api/bookings/current-user', {
+        credentials: 'include',
+        headers: {
+          'content-type': 'application/json'
+        }
+      });
 
-      // Simulated response to test functionality
-      const simulatedResponse = {
-      ok: true,
-      json: async () => ({
-        // data: []
-
-        data: [
-          { id: 1, title: "Morning Cardio", date: "2025-10-02", time: "07:00 - 08:00" },
-          { id: 2, title: "Strength Training", date: "2025-10-03", time: "09:00 - 10:00" }
-        ]
-      })
-    };
-
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-      // if(!response.ok) {
-      //   console.log("Fetch failed", response.statusText);
-      //   setError(response.statusText);
-      //   setLoading(false);
-      //   return;
-      // }
-
-      if(!simulatedResponse.ok) {
-        console.log("Fetch failed", simulatedResponse.statusText);
-        setError(simulatedResponse.statusText);
+      if(!response.ok) {
+        console.log("Fetch failed", response.statusText);
+        setError(response.statusText);
         setLoading(false);
         return;
       }
 
-      // const data = await response.json();
-      const data = await simulatedResponse.json();
+      const data = await response.json();
       setBookings(data.data);
       console.log('Bookings fetched:', data.data);
 
@@ -100,8 +95,7 @@ export const UserBookingsPage = () => {
               <div className='booking-info'>
                 <h3 className='booking-event-title'>{booking.title}</h3>
                 <div className='date-time'>
-                  <p className='booking-date'>{booking.date}</p>
-                  <p className='booking-time'>{booking.time}</p>
+                  <p className='booking-date'>{formatDate(booking.date)}</p>
                 </div>
               </div>
             </div>
