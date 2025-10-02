@@ -35,12 +35,12 @@
   border: 1px solid var(--grey-50);
   border-radius: 10px;
   padding: 0.5rem 0;
-  min-width: 160px;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   animation: fadeIn 0.2s ease-in-out;
-  display: flex;
-  flex-direction: column;
 }
 
 .menu-icon {
@@ -55,11 +55,19 @@
   background: transparent;
   border: none;
   text-align: left;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: var(--grey-110);
   text-decoration: none;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+
+  @media (min-width: 1024px) {
+    font-size: 0.9rem;
+  }
 }
 
 .menu-item:hover {

@@ -75,7 +75,7 @@ export const MenuBtn = () => {
               <FaCalendarAlt className="menu-icon" /> Alla Pass
             </button>
             <button className="menu-item">
-              <FaCalendarAlt className="menu-icon" /> Bokningar
+              <FaCalendarAlt className="menu-icon" /> Mina Bokningar
             </button>
             <button className="menu-item logout-btn" onClick={handleLogout}>
               <IoLogOut className="menu-icon" /> Logga ut

@@ -6,12 +6,12 @@ import { IoLogOut } from "react-icons/io5"
 
 
 export const Header = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const location = useLocation();
 
   const checkScreenSize = () => {
-    setIsMobile(window.innerWidth < 768); // 768px som breakpoint
+    setIsDesktop(window.innerWidth >= 1024); 
   };
   
   useEffect(() => {
@@ -31,15 +31,23 @@ export const Header = () => {
   // Olika menyalternativ för user vs admin
   const getUserNavLinks = () => (
     <>
-      <Link to="/sessionsUser" className="nav-link">Alla Sessions</Link>
-      <Link to="/bookings" className="nav-link">Mina Bokningar</Link>
+      <Link to="/sessionsUser" className="nav-link">
+        <p>Alla Pass</p>
+      </Link>
+      <Link to="/bookings" className="nav-link">
+        <p>Mina Bokningar</p>
+      </Link>
     </>
   );
 
   const getAdminNavLinks = () => (
     <>
-      <Link to="/sessionsAdmin" className="nav-link">Alla Sessions</Link>
-      <Link to="/createsessions" className="nav-link">Skapa Session</Link>
+      <Link to="/sessionsAdmin" className="nav-link">
+        <p>Alla Pass</p>
+      </Link>
+      <Link to="/createsessions" className="nav-link">
+        <p>Skapa Pass</p>
+      </Link>
     </>
   );
 
@@ -50,7 +58,7 @@ export const Header = () => {
           <img src="./images/logo.png" alt="GymSlay Logo" className='logo'/>
         </Link>
 
-        {isMobile ? (
+        {!isDesktop ? (
           <MenuBtn />
         ) : (
           <nav className="navbar">

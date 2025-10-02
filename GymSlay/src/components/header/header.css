@@ -14,7 +14,7 @@
     width: 100%;
 
     @media (min-width: 768px) {
-        max-width: 681px;;
+        max-width: 681px;
     }
 
     @media (min-width: 1024px) {
@@ -25,4 +25,24 @@
     height: 3.25rem;
     width: 5.5rem;
     cursor: pointer;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--accent-110);
+    font-size: .8rem;
+    transition: all 0.2s ease-in-out;
+    padding: .2rem;
+}
+
+.nav-link:hover {
+    color: var(--red-100);
+    text-shadow: 0 0 8px var(--red-120);
 }
