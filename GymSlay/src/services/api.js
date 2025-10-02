@@ -4,25 +4,25 @@ export const API_URL = import.meta.env.VITE_API_URL || "https://localhost:7067/a
 
 // Authentication functions
 export async function signIn(credentials) {
-    const response = await fetch(`${API_URL}/auth`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email: credentials.email,
-            password: credentials.password
-        }),
-        credentials: 'include' // Include cookies for authentication
-    });
+  const response = await fetch(`${API_URL}/auth`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      email: credentials.email,
+      password: credentials.password
+    }),
+    credentials: 'include' // Include cookies for authentication
+  });
 
-    if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.Message || errorData.message || 'Inloggning misslyckades');
-    }
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.Message || errorData.message || 'Inloggning misslyckades');
+  }
 
-    // Since backend returns Ok() with no body, we return a success indicator
-    return { success: true, message: 'Inloggning lyckades' };
+  // Since backend returns Ok() with no body, we return a success indicator
+  return { success: true, message: 'Inloggning lyckades' };
 }
 
 // Note: Register endpoint is not implemented in the current backend
@@ -31,34 +31,34 @@ export async function signIn(credentials) {
 // }
 
 export async function signOut() {
-    const response = await fetch(`${API_URL}/auth/signout`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        credentials: 'include' // Include cookies for authentication
-    });
+  const response = await fetch(`${API_URL}/auth/signout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: 'include' // Include cookies for authentication
+  });
 
-    if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.Message || errorData.message || 'Utloggning misslyckades');
-    }
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.Message || errorData.message || 'Utloggning misslyckades');
+  }
 
-    // Clear local storage
-    localStorage.removeItem("session");
-    localStorage.removeItem("token");
+  // Clear local storage
+  localStorage.removeItem("session");
+  localStorage.removeItem("token");
 
-    return true;
+  return true;
 }
 
 
 export async function createSession(payload) {
-    const response = await fetch(`${API_URL}/sessions`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(payload)
-    })
-    return response
+  const response = await fetch(`${API_URL}/sessions`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+  return response
 }
 
 export async function bookSession(id) {

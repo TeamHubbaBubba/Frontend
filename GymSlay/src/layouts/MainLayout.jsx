@@ -1,7 +1,7 @@
-import React from 'react'
-import { Header } from '../components/header/Header'
-import './layout.css'
-import { Outlet } from 'react-router'
+import React from "react";
+import { Header } from "../components/header/Header";
+import "./layout.css";
+import { Outlet } from "react-router";
 
 export const MainLayout = () => {
   return (
@@ -11,5 +11,5 @@ export const MainLayout = () => {
         <Outlet />
       </main>
     </>
-  )
-}
+  );
+};

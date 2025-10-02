@@ -62,22 +62,26 @@ const SignInModal = ({ isOpen, onClose, onSignIn, onRegister }) => {
           <SignInForm onSubmit={handleSignIn} onCancel={handleClose} />
           <div className="form-switch">
             <p className="switch-text">
-              Har du inget konto? 
-              <button 
-                type="button" 
-                className="switch-link" 
+              Har du inget konto?
+              <button
+                type="button"
+                className="switch-link"
                 onClick={switchToRegister}
               >
                 Skapa Konto
               </button>
             </p>
-            <p className="info-text" style={{
-              fontSize: '0.8rem', 
-              color: 'var(--text-secondary)', 
-              marginTop: '0.5rem',
-              fontStyle: 'italic'
-            }}>
-              Obs: Registrering är inte tillgänglig ännu. Kontakta administratören för att skapa ett konto.
+            <p
+              className="info-text"
+              style={{
+                fontSize: "0.8rem",
+                color: "var(--text-secondary)",
+                marginTop: "0.5rem",
+                fontStyle: "italic",
+              }}
+            >
+              Obs: Registrering är inte tillgänglig ännu. Kontakta
+              administratören för att skapa ett konto.
             </p>
           </div>
         </>

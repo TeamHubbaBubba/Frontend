@@ -34,11 +34,11 @@ export const MenuBtn = () => {
 
     // Listen for localStorage changes
     const interval = setInterval(checkAuthStatus, 1000);
-    window.addEventListener('storage', checkAuthStatus);
+    window.addEventListener("storage", checkAuthStatus);
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener('storage', checkAuthStatus);
+      window.removeEventListener("storage", checkAuthStatus);
     };
   }, []);
 
@@ -54,18 +54,18 @@ export const MenuBtn = () => {
 
     try {
       const result = await signIn(formData);
-      
+
       // Store user session info (authentication is handled by cookies)
       const sessionData = {
         email: formData.email,
         isLoggedIn: true,
-        loginTime: new Date().toISOString()
+        loginTime: new Date().toISOString(),
       };
       localStorage.setItem("session", JSON.stringify(sessionData));
-      
+
       // Update authentication state immediately
       setIsAuthenticated(true);
-      
+
       console.log("Sign in successful:", result.message);
       // Navigate to appropriate page after successful login
       navigate("/sessionsUser");
@@ -79,13 +79,15 @@ export const MenuBtn = () => {
     console.log("Register attempt with:", formData);
 
     // Registration is not implemented in the backend yet
-    throw new Error("Registrering är inte tillgänglig ännu. Kontakta administratören för att skapa ett konto.");
+    throw new Error(
+      "Registrering är inte tillgänglig ännu. Kontakta administratören för att skapa ett konto."
+    );
   };
 
   const handleLogout = async () => {
     try {
       await signOut();
-      
+
       // Clear authentication state immediately
       setIsAuthenticated(false);
       setOpen(false);
