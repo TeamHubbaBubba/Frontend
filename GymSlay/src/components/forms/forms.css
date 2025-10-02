@@ -1,17 +1,15 @@
-.session-form {
+.create-form {
   width: 100%;
-  max-width: 400px;
+  max-width: 550px;
   padding: 1rem;
   background: var(--grey-80);
   border-radius: 8px;
 }
 
-.sessions-form {
-  width: 100%;
-  max-width: 400px;
-  padding: 1rem;
-  background: var(--grey-80);
-  border-radius: 8px;
+.create-form h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
 }
 
 .form-title {
@@ -28,7 +26,6 @@
 
 .form-group label {
   margin-bottom: 0.5rem;
-  font-weight: bold;
 }
 
 .form-input {
@@ -48,11 +45,13 @@
 
 .form-input.error-box {
   border-color: var(--error);
-  background-color: rgba(var(--error-rgb), 0.1);
+  background-color: var(--error);
+  opacity: 0.5;
 }
 
 .error-text {
-  color: var(--error);
+  color: var(--red-100);
+  font-weight: bold;
   font-size: 0.875rem;
   margin-top: 0.25rem;
   margin-bottom: 0;
@@ -62,7 +61,7 @@
   width: 100%;
   padding: 0.75rem;
   background: var(--primary);
-  color: white;
+  color: var(--grey-100);
   border: none;
   border-radius: 4px;
   font-size: 1rem;
