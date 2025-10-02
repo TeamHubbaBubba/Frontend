@@ -126,6 +126,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (min-width: 768px) {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
 }
 
 .btn-chevron:hover {
@@ -153,6 +158,12 @@
     cursor: pointer;
     outline: none;
     border: none;    
+
+     @media (min-width: 768px) {
+        font-size: .75rem;
+        padding: .6em 1.5em;
+        margin-left: 1rem;
+     }
 }
 
 .btn-booking-big {
