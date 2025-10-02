@@ -9,7 +9,6 @@ export const MainLayout = () => {
       <Header />
       <main className="wrapper">
         <Outlet />
-
       </main>
     </>
   )
