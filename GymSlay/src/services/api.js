@@ -13,7 +13,7 @@ export async function createSession(payload) {
 }
 
 export async function bookSession(id) {
-  return fetch(`${API_URL}/sessions/${id}/book`, {
+  return fetch(`${API_URL}/bookings/sessions/${id}/bookings`, {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" }

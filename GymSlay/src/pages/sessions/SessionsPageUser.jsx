@@ -9,7 +9,7 @@ export const SessionsPageUser = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [expandedCardId, setExpandedCardId] = useState(null);
-    const [booked, setBooked] = useState(false);
+    const [bookedSessions, setBookedSessions] = useState([]); // id:n för bokade pass
     const [success, setSuccess] = useState(null);
 
     async function handleBook(id) {
@@ -23,19 +23,17 @@ export const SessionsPageUser = () => {
             try { data = await result.json(); } catch {}
 
             if (result.status === 200 && data?.success === true) {
-                setBooked(true);
+                setBookedSessions(prev => [...prev, id]); // Lägg till id för bokat pass
                 setSuccess("Passet är bokat!");
 
-            try {
-                const refreshed = await getSession(id);
-                if (refreshed.ok) {
-                    const freshJson = await refreshed.json();
-                    const fresh = freshJson && freshJson.data ? freshJson.data : freshJson;
-                    setSessions(prev => prev.map(s => (s.id === id ? fresh : s)));
-                }
-            } catch {
-
-                }
+                try {
+                    const refreshed = await getSession(id);
+                    if (refreshed.ok) {
+                        const freshJson = await refreshed.json();
+                        const fresh = freshJson && freshJson.data ? freshJson.data : freshJson;
+                        setSessions(prev => prev.map(s => (s.id === id ? fresh : s)));
+                    }
+                } catch {}
             } else if (result.status === 400 && data?.success === false) {
                 setError("Kunde inte boka passet.");
             } else if (result.status === 401) {
@@ -98,6 +96,7 @@ export const SessionsPageUser = () => {
                     const date = dateTime.toLocaleDateString([], { month: '2-digit', day: '2-digit' });
                     const time = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                     const isFull = session.currentParticipants >= session.maxParticipants;
+                    const isBooked = bookedSessions.includes(session.id);
 
                     return (
                         <div key={session.id} className={`card ${isExpanded ? "expanded" : ""}`}>
@@ -120,9 +119,9 @@ export const SessionsPageUser = () => {
                                     <div className="buttons-group">
                                         <div className="buttons">
                                             <button className="btn-booking" onClick={() => handleBook(session.id)}
-                                                disabled={isFull || loading || booked}
+                                                disabled={isFull || loading || isBooked}
                                             >
-                                                {isFull ? "Fullbokat" : booked ? "Bokad" : loading ? "Bokar..." : "Boka"}
+                                                {isFull ? "Fullbokat" : isBooked ? "Bokad" : loading ? "Bokar..." : "Boka"}
                                             </button>
                                         </div>
                                     </div>
@@ -149,15 +148,15 @@ export const SessionsPageUser = () => {
                                     </div>
 
                                     {error && <p className="error-text">{error}</p>}
-                                    {booked && <p className="success-text">Passet är bokat! Slay!</p>}
+                                    {isBooked && <p className="success-text">Passet är bokat! Slay!</p>}
                                     <div>
                                         <div className="buttons">
                                             <button 
                                                 className="btn-booking-big"
                                                 onClick={() => handleBook(session.id)}
-                                                disabled={isFull || loading || booked}
+                                                disabled={isFull || loading || isBooked}
                                             >
-                                                {isFull ? "Fullbokat" : booked ? "Bokad" : loading ? "Bokar..." : "Boka"}
+                                                {isFull ? "Fullbokat" : isBooked ? "Bokad" : loading ? "Bokar..." : "Boka"}
                                             </button>
                                         </div>
                                     </div>
