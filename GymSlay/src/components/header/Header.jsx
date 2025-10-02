@@ -10,10 +10,11 @@ export const Header = () => {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const location = useLocation();
 
+  const checkScreenSize = () => {
+    setIsMobile(window.innerWidth < 768); // 768px som breakpoint
+  };
+  
   useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768); // 768px som breakpoint
-    };
 
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
@@ -21,7 +22,7 @@ export const Header = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  // Automatiskt sätt admin-läge baserat på nuvarande sida
+  // Sätt admin-läge automatiskt baserat på nuvarande sida
   useEffect(() => {
     const isOnAdminPage = location.pathname.includes('Admin') || location.pathname.includes('createsessions');
     setIsAdminMode(isOnAdminPage);
@@ -30,16 +31,15 @@ export const Header = () => {
   // Olika menyalternativ för user vs admin
   const getUserNavLinks = () => (
     <>
-      <Link to="/sessionsUser" className="nav-link">Sessions</Link>
+      <Link to="/sessionsUser" className="nav-link">Alla Sessions</Link>
       <Link to="/bookings" className="nav-link">Mina Bokningar</Link>
     </>
   );
 
   const getAdminNavLinks = () => (
     <>
-      <Link to="/sessionsAdmin" className="nav-link">Hantera Sessions</Link>
+      <Link to="/sessionsAdmin" className="nav-link">Alla Sessions</Link>
       <Link to="/createsessions" className="nav-link">Skapa Session</Link>
-      <Link to="/bookings/admin" className="nav-link">Alla Bokningar</Link>
     </>
   );
 
@@ -56,7 +56,7 @@ export const Header = () => {
           <nav className="navbar">
             {isAdminMode ? getAdminNavLinks() : getUserNavLinks()}
             <Link to="/logout" className="nav-link">
-              <IoLogOut /> Logga ut
+              Logga ut
             </Link>
           </nav>
         )}

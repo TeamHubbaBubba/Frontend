@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoLogOut } from "react-icons/io5"
 import { FaCalendarAlt } from "react-icons/fa"
 import menuIcon from '../../assets/images/MenuBtn.svg'
 import './buttons.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { API_URL } from '../../services/api'
 
 export const MenuBtn = () => {
-  const [open, setOpen] = useState(false)
-  const navigate = useNavigate()
+  const [open, setOpen] = useState(false);
+  const [isAdminMode, setIsAdminMode] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const isOnAdminPage = location.pathname.includes('Admin') || location.pathname.includes('createsessions');
+    setIsAdminMode(isOnAdminPage);
+  }, [location.pathname]);
 
   const handleToggle = () => setOpen(!open)
 
@@ -49,14 +56,32 @@ export const MenuBtn = () => {
       </button>
 
       {open && (
-        <div className="dropdown-menu">
-          <button className="menu-item">
-            <FaCalendarAlt className="menu-icon" /> Bokningar
-          </button>
-          <button className="menu-item logout-btn" onClick={handleLogout}>
-            <IoLogOut className="menu-icon" /> Logga ut
-          </button>
-        </div>
+        isAdminMode ? (
+          <div className="dropdown-menu">
+            <button className="menu-item">
+              <FaCalendarAlt className="menu-icon" /> Alla Pass
+            </button>
+            <button className="menu-item">
+              <FaCalendarAlt className="menu-icon" /> Skapa Pass
+            </button>
+            <button className="menu-item logout-btn" onClick={handleLogout}>
+              <IoLogOut className="menu-icon" /> Logga ut
+            </button>
+          </div>
+        )
+      : (
+          <div className="dropdown-menu">
+            <button className="menu-item">
+              <FaCalendarAlt className="menu-icon" /> Alla Pass
+            </button>
+            <button className="menu-item">
+              <FaCalendarAlt className="menu-icon" /> Bokningar
+            </button>
+            <button className="menu-item logout-btn" onClick={handleLogout}>
+              <IoLogOut className="menu-icon" /> Logga ut
+            </button>
+          </div>
+      )
       )}
     </div>
   )
