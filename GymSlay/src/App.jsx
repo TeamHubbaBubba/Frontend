@@ -5,7 +5,7 @@ import { MainLayout } from "./layouts/MainLayout"
 import { SessionsPageUser } from "./pages/sessions/SessionsPageUser"
 import { SessionsPageAdmin } from "./pages/sessions/SessionsPageAdmin"
 import { CreateSessionPage } from "./pages/sessions/CreateSessionPage"
-
+import { UserBookingsPage } from "./pages/sessions/UserBookingsPage"
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
           <Route path="sessionsUser" element={<SessionsPageUser />} />
           <Route path="sessionsAdmin" element={<SessionsPageAdmin />} />
           <Route path="createsessions" element={<CreateSessionPage />} />
+          <Route path="userbookings" element={<UserBookingsPage />} />
       </Route>
     </Routes>
   );
