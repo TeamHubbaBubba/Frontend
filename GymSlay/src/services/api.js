@@ -25,10 +25,23 @@ export async function signIn(credentials) {
   return { success: true, message: 'Inloggning lyckades' };
 }
 
-// Note: Register endpoint is not implemented in the current backend
-// export async function register(userData) {
-//     // Register functionality needs to be implemented in the backend first
-// }
+export async function handleRegister(userData) {
+  const response = await fetch(`${API_URL}/users/createuser`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userData),
+    credentials: 'include'
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.Message || errorData.message || 'Registrering misslyckades');
+  }
+
+  return { success: true, message: 'Registrering lyckades' };
+}
 
 export async function signOut() {
   const response = await fetch(`${API_URL}/auth/signout`, {

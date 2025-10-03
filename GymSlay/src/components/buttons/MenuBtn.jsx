@@ -3,13 +3,13 @@ import { IoLogOut, IoLogIn } from "react-icons/io5";
 import { FaCalendarAlt } from "react-icons/fa";
 import menuIcon from "../../assets/images/MenuBtn.svg";
 import "./buttons.css";
-import { useNavigate } from "react-router-dom";
-import { signIn, signOut } from "../../services/api";
-import SignInModal from "../forms/SignInModal";
+import { useNavigate, useLocation } from "react-router-dom";
+import { API_URL, signIn, signOut } from "../../services/api";
+import { SignInModal } from "../forms/SignInModal";
 
 export const MenuBtn = () => {
   const [open, setOpen] = useState(false);
-  const [isAdminMode, setIsAdminMode] = useState(false);;
+  const [isAdminMode, setIsAdminMode] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();;
@@ -82,14 +82,23 @@ export const MenuBtn = () => {
     }
   };
 
-  const handleRegister = async (formData) => {
-    console.log("Register attempt with:", formData);
-
-    // Registration is not implemented in the backend yet
-    throw new Error(
-      "Registrering är inte tillgänglig ännu. Kontakta administratören för att skapa ett konto."
-    );
-  };
+   async function handleRegister(formData) {
+    console.log("Register attempt ************ with:", formData);
+    const response = await fetch(`${API_URL}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData),
+    });
+  
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.Message || errorData.message || 'Registrering misslyckades');
+    }
+  
+    return { success: true, message: 'Registrering lyckades' };
+  }
 
   const handleLogout = async () => {
     try {
@@ -98,7 +107,7 @@ export const MenuBtn = () => {
       // Clear authentication state immediately
       setIsAuthenticated(false);
       setOpen(false);
-      navigate("/");
+      navigate("/signin");
       console.log("Logout successful");
     } catch (error) {
       console.error("Logout error", error);
@@ -106,7 +115,7 @@ export const MenuBtn = () => {
       localStorage.removeItem("session");
       setIsAuthenticated(false);
       setOpen(false);
-      navigate("/");
+      navigate("/signin");
     }
   };
 
