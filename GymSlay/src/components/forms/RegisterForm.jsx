@@ -216,8 +216,8 @@ const RegisterForm = ({ onSubmit, onCancel }) => {
       try {
         if (onSubmit) {
           // Remove confirmPassword from the data sent to API
-          const { confirmPassword: _, ...submitData } = formData;
-          await onSubmit(submitData);
+          // const { confirmPassword: _, ...submitData } = formData;
+          await onSubmit(formData);
         }
       } catch (error) {
         console.error("Registration error:", error);
