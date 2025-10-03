@@ -14,6 +14,7 @@ export const EditSessionForm = () => {
                 if (!response.ok) throw new Error("Failed to fetch session");
                 const data = await response.json();
                 setSession(data.data);
+                console.log(data.data);
             } catch (err) {
                 console.error(err);
             }
@@ -56,7 +57,7 @@ export const EditSessionForm = () => {
             <div className="form-group">
                 <label htmlFor="description">Beskrivning</label>
                 <textarea 
-                    className="form-textarea"
+                    className="form-input"
                     id="description"
                     value={session.description || ""}
                     onChange={(e) => setSession({ ...session, description: e.target.value})}
@@ -64,14 +65,14 @@ export const EditSessionForm = () => {
             </div>
 
             <div className="form-group">  
-                <label htmlFor="sessionDate">Tid</label>
+                <label htmlFor="date">Tid</label>
                 <input 
                     className="form-input"
                     type="datetime-local" 
-                    id="sessionDate" 
-                    name="sessionDate" 
+                    id="date" 
+                    name="date" 
                     value={session.date || ""}
-                    onChange={(e) => setSession({ ...session, sessionDate: e.target.value})}
+                    onChange={(e) => setSession({ ...session, date: e.target.value})}
                 />
             </div>
 
@@ -97,7 +98,7 @@ export const EditSessionForm = () => {
                 />
             </div>
 
-            <button type="submit" className="btn btn-primary">Spara</button>
+            <button type="submit" className="btn-submit">Spara</button>
         </form>
     )
 }
