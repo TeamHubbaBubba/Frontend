@@ -13,7 +13,7 @@ export const EditSessionForm = () => {
                 const response = await fetch(`https://localhost:7067/api/sessions/${id}`);
                 if (!response.ok) throw new Error("Failed to fetch session");
                 const data = await response.json();
-                setSession(data);
+                setSession(data.data);
             } catch (err) {
                 console.error(err);
             }
@@ -27,12 +27,12 @@ export const EditSessionForm = () => {
         e.preventDefault();
         try {
             const response = await fetch(`https://localhost:7067/api/sessions/${id}`, {
-                method: "PUT",
+                method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(session),
             });
             if (!response.ok) throw new Error("Update failed");
-            navigate("/sessions");
+            navigate("/sessionsadmin");
         } catch (err) {
             console.error(err);
         }

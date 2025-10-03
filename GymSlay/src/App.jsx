@@ -14,7 +14,7 @@ function App() {
           <Route path="sessions" element={<SessionsPage />} />
           <Route path="sessiondetails" element={<ListCards />} />
           <Route path="createsessions" element={<CreateSessionPage />} />
-          <Route path="editsession" element={<EditSessionForm/>}/>
+          <Route path="editsession/:id" element={<EditSessionForm/>}/>
       </Route>
     </Routes>
   );
