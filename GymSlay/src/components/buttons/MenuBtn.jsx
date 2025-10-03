@@ -3,7 +3,7 @@ import { IoLogOut } from "react-icons/io5"
 import { FaCalendarAlt } from "react-icons/fa"
 import menuIcon from '../../assets/images/MenuBtn.svg'
 import './buttons.css'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, NavLink } from 'react-router-dom'
 import { API_URL } from '../../services/api'
 
 export const MenuBtn = () => {
@@ -57,30 +57,30 @@ export const MenuBtn = () => {
 
       {open && (
         isAdminMode ? (
-          <div className="dropdown-menu">
-            <button className="menu-item">
+          <nav className="dropdown-menu">
+            <NavLink to="/sessionsAdmin" className="menu-item" onClick={() => setOpen(false)}>
               <FaCalendarAlt className="menu-icon" /> Alla Pass
-            </button>
-            <button className="menu-item">
+            </NavLink>
+            <NavLink to="/createsessions" className="menu-item" onClick={() => setOpen(false)}>
               <FaCalendarAlt className="menu-icon" /> Skapa Pass
-            </button>
+            </NavLink>
             <button className="menu-item logout-btn" onClick={handleLogout}>
               <IoLogOut className="menu-icon" /> Logga ut
             </button>
-          </div>
+          </nav>
         )
       : (
-          <div className="dropdown-menu">
-            <button className="menu-item">
+          <nav className="dropdown-menu">
+            <NavLink to="/sessionsUser" className="menu-item" onClick={() => setOpen(false)}>
               <FaCalendarAlt className="menu-icon" /> Alla Pass
-            </button>
-            <button className="menu-item">
+            </NavLink>
+            <NavLink to="/bookings" className="menu-item" onClick={() => setOpen(false)}>
               <FaCalendarAlt className="menu-icon" /> Mina Bokningar
-            </button>
+            </NavLink>
             <button className="menu-item logout-btn" onClick={handleLogout}>
               <IoLogOut className="menu-icon" /> Logga ut
             </button>
-          </div>
+          </nav>
       )
       )}
     </div>

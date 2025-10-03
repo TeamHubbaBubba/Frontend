@@ -188,7 +188,7 @@ export const SessionsPageUser = () => {
                                                 <div className="card-content-group">
                                                     <div className="title">{session.title}</div>
                                                     <div className="time">{date} kl: {time}</div>
-                                                    <div className="intensity">{session.intensity || "Medium"}</div>
+                                                    <div className="intensity">Intensitet: {session.intensity || "Medium"}</div>
                                                 </div>
                                             </div>
                                             <div className="description">{session.description}</div>

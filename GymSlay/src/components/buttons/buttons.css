@@ -104,6 +104,7 @@
     border: none;
     color: var(--grey-20);
     text-decoration: none;
+    margin: 1rem 0;
 }
 
 .add-session-btn:hover {
@@ -166,12 +167,15 @@
      @media (min-width: 768px) {
         font-size: .75rem;
         padding: .6em 1.5em;
-        margin-left: 1rem;
      }
 }
 
 .delete-btn {
     background-color: var(--red-btn-background);
+
+    @media (min-width: 768px) {
+        margin-left: .7rem;
+    }
 
     &:hover {
         background-color: var(--red-btn-hover);
@@ -186,4 +190,10 @@
         background-color: var(--grey-btn-hover);
         box-shadow: 0 0 3px var(--grey-btn-hover);
     }
+}
+
+.btn-edit {
+  @media (min-width: 768px) {
+    margin-left: 1rem;
+  }
 }

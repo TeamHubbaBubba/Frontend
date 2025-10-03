@@ -13,6 +13,20 @@ export const SessionsPageAdmin = () => {
     const [sessionId, setSessionId] = useState(null);
     const [expandedCardId, setExpandedCardId] = useState(null);
 
+    const [isTablet, setIsTablet] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    const checkScreenSize = () => {
+        setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024); 
+        setIsDesktop(window.innerWidth >= 1024); 
+    };      
+
+    useEffect(() => {
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+        return () => window.removeEventListener('resize', checkScreenSize);
+    }, []);
+
     const getSessionInfo = () => sessions.find(session => session.id === sessionId);
 
     useEffect(() => {
@@ -88,47 +102,94 @@ export const SessionsPageAdmin = () => {
                             {!isExpanded && (
                                 <>
                                     <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
-                                    <div className="card-content-group">
-                                        <div className="title">{session.title}</div>
-                                        <div className="time">{date} kl: {time}</div>
-                                        <div className="details-group">
-                                            <div className="intensity">{session.intensity || "Medium"}</div>
-                                            <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
+                                    
+                                    {(isTablet || isDesktop) ? (
+                                        <>  
+                                            <div className="card-content-group">
+                                                <div className="content-top">
+                                                    <div className="title">{session.title}</div>
+                                                    <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
+                                                </div>
+                                                <div className="time">{date} kl: {time}</div>
+                                                <div className="content-bottom">
+                                                    <div className="intensity">Intensitet: {session.intensity || "Medium"}</div>                                                    
+                                                    <div className="buttons">
+                                                        <button className="btn-edit">Edit</button>
+                                                        <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                            
+                                        </>
+                                    )
+                                
+                                    : (
+                                        <div className="card-content-group">
+                                            <div className="title">{session.title}</div>
+                                            <div className="time">{date} kl: {time}</div>
+                                            <div className="content-bottom">
+                                                    <div className="intensity">{session.intensity || "Medium"}</div>
+                                                    <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
+                                                
+                                                <div className="buttons">
+                                                    <button className="btn-edit">Edit</button>
+                                                    <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="buttons-group">
-                                        <div className="buttons">
-                                            <button className="btn-edit">Edit</button>
-                                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
-                                        </div>
-                                    </div>
+                                    )}
                                 </>
                             )}
 
                             {isExpanded && (
                                 <>
-                                    <div className="expanded-top">
-                                        <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
-                                        <div className="card-content-group">
-                                            <div className="title">{session.title}</div>
-                                            <div className="time">{date} kl: {time}</div>
-                                            <div className="details-group">
-                                                <div className="intensity">{session.intensity || "Medium"}</div>
+                                    {isTablet ? (
+                                        <>
+                                            <div className="expanded-top">
+                                                <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
+                                                <div className="card-content-group">
+                                                    <div className="content-top">
+                                                        <div className="title">{session.title}</div>
+                                                        <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
+                                                    </div>
+                                                    <div className="time">{date} kl: {time}</div>
+                                                    <div className="description">{session.description}</div>
+                                                    <div className="expanded-bottom">
+                                                        <div className="intensity">Intensitet: {session.intensity || "Medium"}</div>                                                    
+                                                        <div className="buttons">
+                                                            <button className="btn-edit">Edit</button>
+                                                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </>
+                                    ) 
+                                    : (
+                                        <>
+                                            <div className="expanded-top">
+                                                <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
+                                                <div className="card-content-group">
+                                                    <div className="title">{session.title}</div>
+                                                    <div className="time">{date} kl: {time}</div>
+                                                    <div className="intensity">Intensitet: {session.intensity || "Medium"}</div>
+                                                    
+                                                </div>
+                                            </div>
 
-                                    <div className="description">{session.description}</div>
+                                            <div className="description">{session.description}</div>
 
-                                    <div className="expanded-bottom">
-                                        <div className="spots">
-                                            Platser: {session.currentParticipants}/{session.maxParticipants}
-                                        </div>
-                                        <div className="buttons">
-                                            <button className="btn-edit">Edit</button>
-                                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
-                                        </div>
-                                    </div>
+                                            <div className="expanded-bottom">
+                                                <div className="spots">
+                                                    Platser: {session.currentParticipants}/{session.maxParticipants}
+                                                </div>
+                                                <div className="buttons">
+                                                    <button className="btn-edit">Edit</button>
+                                                    <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
                                 </>
                             )}
                         </div>

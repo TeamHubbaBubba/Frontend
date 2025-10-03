@@ -47,6 +47,7 @@
     justify-content: center;
     padding: .5em 1em;
     border-radius: 1.5rem;
+    margin: 1rem 0;
     box-shadow: 0 0 5px 5px var(--accent-100);
 }
 
@@ -76,7 +77,7 @@
 
 .card:not(.expanded) {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr;
     gap: .5rem;
     align-items: start;
 }
@@ -130,7 +131,23 @@
     }
 }
 
+.expanded-bottom {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: flex-end;
+    gap: .5rem;
+
+    @media (min-width: 768px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 0;
+    }
+}
+
 .details-group {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -185,19 +202,18 @@
 .spots {
     white-space: nowrap;
     display: inline-block;
-    flex-shrink: 0;
+    flex-shrink: 0;    
 }  
 
 .intensity {
     margin-top: .4rem;
 }
 
-.buttons-group {
-    height: 100%;
+.buttons {
     display: flex;
-    flex-direction: column;
     justify-content: flex-end;
-    align-items: end;
+    align-items: center;
+    gap: .5rem;
 }
 
 .expanded-top, .expanded-card {
@@ -210,14 +226,6 @@
     @media (min-width: 768px) {
         height: 100%;
     }
-}
-
-.expanded-bottom {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0.5rem;
 }
 
 .description {
