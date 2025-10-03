@@ -45,6 +45,7 @@ export const EditSessionForm = () => {
             <div className="form-group">
                 <label htmlFor="title">Titel</label>
                 <input 
+                    className="form-input"
                     type="text"
                     id="title"
                     value={session.title || ""} 
@@ -55,17 +56,31 @@ export const EditSessionForm = () => {
             <div className="form-group">
                 <label htmlFor="description">Beskrivning</label>
                 <textarea 
+                    className="form-textarea"
                     id="description"
                     value={session.description || ""}
                     onChange={(e) => setSession({ ...session, description: e.target.value})}
                 />
             </div>
 
+            <div className="form-group">  
+                <label htmlFor="sessionDate">Tid</label>
+                <input 
+                    className="form-input"
+                    type="datetime-local" 
+                    id="sessionDate" 
+                    name="sessionDate" 
+                    value={session.date || ""}
+                    onChange={(e) => setSession({ ...session, sessionDate: e.target.value})}
+                />
+            </div>
+
             <div className="form-group">
                 <label htmlFor="intensity">Intensitet</label>
                 <input 
+                    className="form-input"
                     type="text"
-                   id="intensity"
+                    id="intensity"
                     value={session.intensity || ""}
                     onChange={(e) => setSession({ ...session, intensity: e.target.value })} 
                 />
@@ -74,6 +89,7 @@ export const EditSessionForm = () => {
             <div className="form-group">
                 <label htmlFor="maxParticipants">Max Deltagare</label>
                 <input 
+                    className="form-input"
                     type="number"
                     id="maxParticipants"
                     value={session.maxParticipants || ""}

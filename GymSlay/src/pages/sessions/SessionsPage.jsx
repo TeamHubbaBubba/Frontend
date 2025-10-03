@@ -128,7 +128,7 @@ export const SessionsPage = () => {
                             </button>
                             <div className="buttons">
                                 <button className="btn-booking">Boka</button>
-                                <button className="btn-edit" onClick={() => navigate(`/editsessions/${session.id}`)}>Edit</button>
+                                <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
                                 <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>
                                     <CgClose />
                                 </button>
