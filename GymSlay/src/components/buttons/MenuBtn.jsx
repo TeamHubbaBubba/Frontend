@@ -3,7 +3,7 @@ import { IoLogOut, IoLogIn } from "react-icons/io5";
 import { FaCalendarAlt } from "react-icons/fa";
 import menuIcon from "../../assets/images/MenuBtn.svg";
 import "./buttons.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { API_URL, signIn, signOut } from "../../services/api";
 import { SignInModal } from "../forms/SignInModal";
 
@@ -138,7 +138,7 @@ export const MenuBtn = () => {
             </button>
           ) : (
             isAdminMode ? (
-              <nav className="dropdown-menu">
+              <>
                 <NavLink to="/sessionsAdmin" className="menu-item" onClick={() => setOpen(false)}>
                   <FaCalendarAlt className="menu-icon" /> Alla Pass
                 </NavLink>
@@ -148,10 +148,10 @@ export const MenuBtn = () => {
                 <button className="menu-item logout-btn" onClick={handleLogout}>
                   <IoLogOut className="menu-icon" /> Logga ut
                 </button>
-              </nav>
+              </>
             )
           : (
-              <nav className="dropdown-menu">
+              <>
                 <NavLink to="/sessionsUser" className="menu-item" onClick={() => setOpen(false)}>
                   <FaCalendarAlt className="menu-icon" /> Alla Pass
                 </NavLink>
@@ -161,7 +161,7 @@ export const MenuBtn = () => {
                 <button className="menu-item logout-btn" onClick={handleLogout}>
                   <IoLogOut className="menu-icon" /> Logga ut
                 </button>
-              </nav>
+              </>
             )
           )}
         </div>
