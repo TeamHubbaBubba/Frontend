@@ -7,7 +7,7 @@ import { SessionsPageAdmin } from "./pages/sessions/SessionsPageAdmin"
 import { CreateSessionPage } from "./pages/sessions/CreateSessionPage"
 import { SignInModal } from "./components/forms/SignInModal";
 import { RegisterModal } from "./components/forms/RegisterModal";
-
+import { UserBookingsPage } from "./pages/sessions/UserBookingsPage"
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
           <Route path="createsessions" element={<CreateSessionPage />} />
           <Route path="signin" element={<SignInModal />} />
           <Route path="register" element={<RegisterModal />} />
+          <Route path="userbookings" element={<UserBookingsPage />} />
       </Route>
     </Routes>
   );
