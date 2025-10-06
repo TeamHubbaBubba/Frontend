@@ -100,75 +100,66 @@ export const SessionsPageAdmin = () => {
                                 <FaChevronDown />
                             </button>
 
-                            {!isExpanded && (
+                            {!isExpanded ? (
                                 <>
                                     <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
 
-                                    
                                     {(isTablet || isDesktop) ? (
-                                        <>  
+                                        <div className="card-content-group">
+                                            <div className="content-top">
+                                                <div className="title">{session.title}</div>
+                                                <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
+                                            </div>
+                                            <div className="time">{date} kl: {time}</div>
+                                            <div className="content-bottom">
+                                                <div className="intensity">Intensitet: {session.intensity || "Medium"}</div>
+                                                <div className="buttons">
+                                                    <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
+                                                    <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div className="card-content-group">
+                                                <div className="title">{session.title}</div>
+                                                <div className="time">{date} kl: {time}</div>
+                                                <div className="details-group">
+                                                    <div className="intensity">{session.intensity || "Medium"}</div>
+                                                    <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
+                                                </div>
+                                            </div>
+                                            <div className="buttons-group">
+                                                <div className="buttons">
+                                                    <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
+                                                    <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
+                                </>
+                            ) : (
+                                <>
+                                    {isTablet ? (
+                                        <div className="expanded-top">
+                                            <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
                                             <div className="card-content-group">
                                                 <div className="content-top">
                                                     <div className="title">{session.title}</div>
                                                     <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
                                                 </div>
                                                 <div className="time">{date} kl: {time}</div>
-                                                <div className="content-bottom">
-                                                    <div className="intensity">Intensitet: {session.intensity || "Medium"}</div>                                                    
+                                                <div className="description">{session.description}</div>
+                                                <div className="expanded-bottom">
+                                                    <div className="intensity">Intensitet: {session.intensity || "Medium"}</div>
                                                     <div className="buttons">
-                                                        <button className="btn-edit">Edit</button>
+                                                    <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
                                                         <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
-                                                    </div>                                                    
-                                                </div>
-                                            </div>
-                                            
-                                        </>
-                                    )
-                                
-                                    : (
-                                    <div className="card-content-group">
-                                        <div className="title">{session.title}</div>
-                                        <div className="time">{date} kl: {time}</div>
-                                        <div className="details-group">
-                                            <div className="intensity">{session.intensity || "Medium"}</div>
-                                            <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
-                                        </div>
-                                    </div>
-                                    <div className="buttons-group">
-                                        <div className="buttons">
-                                            <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
-                                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
-                                        </div>
-                                    </div>
-                                    )}
-                                </>
-                            )}
-
-                            {isExpanded && (
-                                <>
-                                    {isTablet ? (
-                                        <>
-                                            <div className="expanded-top">
-                                                <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
-                                                <div className="card-content-group">
-                                                    <div className="content-top">
-                                                        <div className="title">{session.title}</div>
-                                                        <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
-                                                    </div>
-                                                    <div className="time">{date} kl: {time}</div>
-                                                    <div className="description">{session.description}</div>
-                                                    <div className="expanded-bottom">
-                                                        <div className="intensity">Intensitet: {session.intensity || "Medium"}</div>                                                    
-                                                        <div className="buttons">
-                                                            <button className="btn-edit">Edit</button>
-                                                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </>
-                                    ) 
-                                    : (
+                                        </div>
+                                    ) : (
                                         <>
                                             <div className="expanded-top">
                                                 <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
@@ -176,21 +167,20 @@ export const SessionsPageAdmin = () => {
                                                     <div className="title">{session.title}</div>
                                                     <div className="time">{date} kl: {time}</div>
                                                     <div className="intensity">Intensitet: {session.intensity || "Medium"}</div>
-                                                    
                                                 </div>
                                             </div>
-
                                             <div className="description">{session.description}</div>
-
-                                    <div className="expanded-bottom">
-                                        <div className="spots">
-                                            Platser: {session.currentParticipants}/{session.maxParticipants}
-                                        </div>
-                                        <div className="buttons">
-                                            <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
-                                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
-                                        </div>
-                                    </div>
+                                            <div className="expanded-bottom">
+                                                <div className="spots">
+                                                    Platser: {session.currentParticipants}/{session.maxParticipants}
+                                                </div>
+                                                <div className="buttons">
+                                                    <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
+                                                    <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
                                 </>
                             )}
                         </div>

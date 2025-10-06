@@ -75,11 +75,14 @@ export async function createSession(payload) {
 }
 
 export async function bookSession(id) {
-  return fetch(`${API_URL}/bookings/sessions/${id}/bookings`, {
+  
+  const response = await fetch(`${API_URL}/Bookings/sessions/${id}/bookings`, {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" }
   });
+  
+  return response;
 }
 
 export async function getSession(id) {

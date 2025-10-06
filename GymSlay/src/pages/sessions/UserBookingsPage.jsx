@@ -40,6 +40,7 @@ export const UserBookingsPage = () => {
         }
       });
 
+      console.log("Fetch response:", response);
       if(!response.ok) {
         console.log("Fetch failed", response.statusText);
         setError(response.statusText);

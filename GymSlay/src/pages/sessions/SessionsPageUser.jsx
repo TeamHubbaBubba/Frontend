@@ -32,10 +32,11 @@ export const SessionsPageUser = () => {
 
             const result = await bookSession(id);
             let data = null;
+            console.log('Booking response status:', result.status);
 
             try { data = await result.json(); } catch {}
-
-            if (result.status === 200 && data?.success === true) {
+                console.log('Booking response data:', data);
+            if (result.status === 200 && (data?.success === true || data === true)) {
                 setBookedSessions(prev => [...prev, id]); // Lägg till id för bokat pass
 
                 try {
@@ -76,8 +77,9 @@ export const SessionsPageUser = () => {
             const response = await fetch(`${API_URL}/sessions`, {
                 credentials: "include"
             });
-
+console.log("Fetch response:", response);
             if(!response.ok) {
+                console.log("Fetch failed", response.statusText);
                 setError(response.statusText);
                 setLoading(false);
                 return;
