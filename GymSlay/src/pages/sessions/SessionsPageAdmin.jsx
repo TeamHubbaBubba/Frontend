@@ -3,7 +3,7 @@ import './sessionsPage.css';
 import '../../components/buttons/buttons.css';
 import { FaChevronDown } from 'react-icons/fa6';
 import { API_URL } from '../../services/api';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 
 export const SessionsPageAdmin = () => {
     const [sessions, setSessions] = useState([]);
@@ -12,7 +12,6 @@ export const SessionsPageAdmin = () => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [sessionId, setSessionId] = useState(null);
     const [expandedCardId, setExpandedCardId] = useState(null);
-
     const [isTablet, setIsTablet] = useState(false);
     const [isDesktop, setIsDesktop] = useState(false);
 
@@ -26,6 +25,8 @@ export const SessionsPageAdmin = () => {
         window.addEventListener('resize', checkScreenSize);
         return () => window.removeEventListener('resize', checkScreenSize);
     }, []);
+  
+    const navigate = useNavigate();
 
     const getSessionInfo = () => sessions.find(session => session.id === sessionId);
 
@@ -102,6 +103,7 @@ export const SessionsPageAdmin = () => {
                             {!isExpanded && (
                                 <>
                                     <img className="image" src={session.thumbnail || "/src/assets/images/girl-training.jpg"} alt={session.title || "Training session image."} />
+
                                     
                                     {(isTablet || isDesktop) ? (
                                         <>  
@@ -124,19 +126,20 @@ export const SessionsPageAdmin = () => {
                                     )
                                 
                                     : (
-                                        <div className="card-content-group">
-                                            <div className="title">{session.title}</div>
-                                            <div className="time">{date} kl: {time}</div>
-                                            <div className="content-bottom">
-                                                    <div className="intensity">{session.intensity || "Medium"}</div>
-                                                    <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
-                                                
-                                                <div className="buttons">
-                                                    <button className="btn-edit">Edit</button>
-                                                    <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
-                                                </div>
-                                            </div>
+                                    <div className="card-content-group">
+                                        <div className="title">{session.title}</div>
+                                        <div className="time">{date} kl: {time}</div>
+                                        <div className="details-group">
+                                            <div className="intensity">{session.intensity || "Medium"}</div>
+                                            <div className="spots">Platser: {session.currentParticipants}/{session.maxParticipants}</div>
                                         </div>
+                                    </div>
+                                    <div className="buttons-group">
+                                        <div className="buttons">
+                                            <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
+                                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                        </div>
+                                    </div>
                                     )}
                                 </>
                             )}
@@ -179,17 +182,15 @@ export const SessionsPageAdmin = () => {
 
                                             <div className="description">{session.description}</div>
 
-                                            <div className="expanded-bottom">
-                                                <div className="spots">
-                                                    Platser: {session.currentParticipants}/{session.maxParticipants}
-                                                </div>
-                                                <div className="buttons">
-                                                    <button className="btn-edit">Edit</button>
-                                                    <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
-                                                </div>
-                                            </div>
-                                        </>
-                                    )}
+                                    <div className="expanded-bottom">
+                                        <div className="spots">
+                                            Platser: {session.currentParticipants}/{session.maxParticipants}
+                                        </div>
+                                        <div className="buttons">
+                                            <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
+                                            <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
+                                        </div>
+                                    </div>
                                 </>
                             )}
                         </div>

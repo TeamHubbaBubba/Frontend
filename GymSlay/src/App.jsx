@@ -7,7 +7,8 @@ import { SessionsPageAdmin } from "./pages/sessions/SessionsPageAdmin"
 import { CreateSessionPage } from "./pages/sessions/CreateSessionPage"
 import { SignInModal } from "./components/forms/SignInModal";
 import { RegisterModal } from "./components/forms/RegisterModal";
-import { UserBookingsPage } from "./pages/sessions/UserBookingsPage"
+import { UserBookingsPage } from "./pages/sessions/UserBookingsPage";
+import { EditSessionForm } from "./components/forms/EditSessionForm";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="signin" element={<SignInModal />} />
           <Route path="register" element={<RegisterModal />} />
           <Route path="userbookings" element={<UserBookingsPage />} />
+          <Route path="editsession/:id" element={<EditSessionForm/>}/>
       </Route>
     </Routes>
   );
