@@ -139,7 +139,7 @@ export const MenuBtn = () => {
           ) : (
             isAdminMode ? (
               <>
-                <NavLink to="/sessionsAdmin" className="menu-item" onClick={() => setOpen(false)}>
+                <NavLink to="/sessionsadmin" className="menu-item" onClick={() => setOpen(false)}>
                   <FaCalendarAlt className="menu-icon" /> Alla Pass
                 </NavLink>
                 <NavLink to="/createsessions" className="menu-item" onClick={() => setOpen(false)}>
@@ -152,10 +152,10 @@ export const MenuBtn = () => {
             )
           : (
               <>
-                <NavLink to="/sessionsUser" className="menu-item" onClick={() => setOpen(false)}>
+                <NavLink to="/sessionsuser" className="menu-item" onClick={() => setOpen(false)}>
                   <FaCalendarAlt className="menu-icon" /> Alla Pass
                 </NavLink>
-                <NavLink to="/bookings" className="menu-item" onClick={() => setOpen(false)}>
+                <NavLink to="/userbookings" className="menu-item" onClick={() => setOpen(false)}>
                   <FaCalendarAlt className="menu-icon" /> Mina Bokningar
                 </NavLink>
                 <button className="menu-item logout-btn" onClick={handleLogout}>

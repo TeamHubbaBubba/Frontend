@@ -126,10 +126,10 @@ export const Header = () => {
   // Olika menyalternativ för user vs admin
   const getUserNavLinks = () => (
     <>
-      <NavLink to="/sessionsUser" className="menu-item">
+      <NavLink to="/sessionsuser" className="menu-item">
        Alla Pass
       </NavLink>
-      <NavLink to="/bookings" className="menu-item">
+      <NavLink to="/userbookings" className="menu-item">
         Mina Bokningar
       </NavLink>
       <button className="menu-item logout-btn" onClick={handleLogout}>
@@ -140,7 +140,7 @@ export const Header = () => {
 
   const getAdminNavLinks = () => (
     <>
-      <NavLink to="/sessionsAdmin" className="menu-item">
+      <NavLink to="/sessionsadmin" className="menu-item">
         Alla Pass
       </NavLink>
       <NavLink to="/createsessions" className="menu-item">
