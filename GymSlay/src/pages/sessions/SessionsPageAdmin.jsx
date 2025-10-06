@@ -3,7 +3,7 @@ import './sessionsPage.css';
 import '../../components/buttons/buttons.css';
 import { FaChevronDown } from 'react-icons/fa6';
 import { API_URL } from '../../services/api';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 
 export const SessionsPageAdmin = () => {
     const [sessions, setSessions] = useState([]);
@@ -12,6 +12,8 @@ export const SessionsPageAdmin = () => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [sessionId, setSessionId] = useState(null);
     const [expandedCardId, setExpandedCardId] = useState(null);
+
+    const navigate = useNavigate();
 
     const getSessionInfo = () => sessions.find(session => session.id === sessionId);
 
@@ -98,7 +100,7 @@ export const SessionsPageAdmin = () => {
                                     </div>
                                     <div className="buttons-group">
                                         <div className="buttons">
-                                            <button className="btn-edit">Edit</button>
+                                            <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
                                             <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
                                         </div>
                                     </div>
@@ -125,7 +127,7 @@ export const SessionsPageAdmin = () => {
                                             Platser: {session.currentParticipants}/{session.maxParticipants}
                                         </div>
                                         <div className="buttons">
-                                            <button className="btn-edit">Edit</button>
+                                            <button className="btn-edit" onClick={() => navigate(`/editsession/${session.id}`)}>Edit</button>
                                             <button className='delete-btn' onClick={() => openDeleteModal(session.id)}>Delete</button>
                                         </div>
                                     </div>
