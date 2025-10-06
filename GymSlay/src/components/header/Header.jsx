@@ -1,15 +1,203 @@
-import React from "react";
-import { MenuBtn } from "../buttons/MenuBtn";
-import "./header.css";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { MenuBtn } from '../buttons/MenuBtn'
+import './header.css'
+import { Link, useLocation, useNavigate, NavLink } from 'react-router-dom';
+import { API_URL, signIn, signOut } from "../../services/api";
+import { IoLogOut, IoLogIn } from "react-icons/io5";
+import { SignInModal } from '../forms/SignInModal';
+
 
 export const Header = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [isAdminMode, setIsAdminMode] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);  
+  const [showSignInModal, setShowSignInModal] = useState(false);
+  const navigate = useNavigate();;
+  const location = useLocation();
+
+  const checkScreenSize = () => {
+    setIsDesktop(window.innerWidth >= 1024); 
+  };
+  
+  useEffect(() => {
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  // Sätt admin-läge automatiskt baserat på nuvarande sida
+  useEffect(() => {
+    const isOnAdminPage = location.pathname.includes('Admin') || location.pathname.includes('createsessions');
+    setIsAdminMode(isOnAdminPage);
+  }, [location.pathname]);
+  
+ // Check authentication status on component mount and when localStorage changes
+  useEffect(() => {
+    const checkAuthStatus = () => {
+      const session = localStorage.getItem("session");
+      if (session) {
+        try {
+          const sessionData = JSON.parse(session);
+          setIsAuthenticated(sessionData.isLoggedIn === true);
+        } catch {
+          setIsAuthenticated(false);
+        }
+      } else {
+        setIsAuthenticated(false);
+      }
+    };
+
+    // Check initial status
+    checkAuthStatus();
+
+    // Listen for localStorage changes
+    const interval = setInterval(checkAuthStatus, 1000);
+    window.addEventListener("storage", checkAuthStatus);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("storage", checkAuthStatus);
+    };
+  }, []);
+
+  const handleSignInClick = () => {
+      setShowSignInModal(true);
+    };
+  
+  const handleSignIn = async (formData) => {
+    console.log("Sign in *************** attempt with:", formData);
+
+    try {
+      const result = await signIn(formData);
+
+      // Store user session info (authentication is handled by cookies)
+      const sessionData = {
+        email: formData.email,
+        isLoggedIn: true,
+        loginTime: new Date().toISOString(),
+      };
+      localStorage.setItem("session", JSON.stringify(sessionData));
+
+      // Update authentication state immediately
+      setIsAuthenticated(true);
+
+      const response = await fetch(`${API_URL}/auth`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.Message || errorData.message || 'Registrering misslyckades');
+      }
+
+      console.log("Sign in successful:", result.message);
+      // Navigate to appropriate page after successful login
+      navigate("/sessionsUser");
+    } catch (error) {
+      console.error("Sign in error", error);
+      throw error; // Let the form handle the error display
+    }
+  };
+
+  async function handleRegister(formData) {
+      console.log("Register attempt ************ with:", formData);
+      const response = await fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+    
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.Message || errorData.message || 'Registrering misslyckades');
+      }
+    
+      return { success: true, message: 'Registrering lyckades' };
+    }
+
+  // Olika menyalternativ för user vs admin
+  const getUserNavLinks = () => (
+    <>
+      <NavLink to="/sessionsuser" className="menu-item">
+       Alla Pass
+      </NavLink>
+      <NavLink to="/userbookings" className="menu-item">
+        Mina Bokningar
+      </NavLink>
+      <button className="menu-item logout-btn" onClick={handleLogout}>
+         Logga ut
+      </button>
+    </>
+  );
+
+  const getAdminNavLinks = () => (
+    <>
+      <NavLink to="/sessionsadmin" className="menu-item">
+        Alla Pass
+      </NavLink>
+      <NavLink to="/createsessions" className="menu-item">
+        Skapa Pass
+      </NavLink>
+      <button className="menu-item logout-btn" onClick={handleLogout}>
+         Logga ut
+      </button>
+    </>
+  );
+
+  const handleLogout = async () => {
+      try {
+        await signOut();
+  
+        // Clear authentication state immediately
+        setIsAuthenticated(false);
+        navigate("/signin");
+        console.log("Logout successful");
+      } catch (error) {
+        console.error("Logout error", error);
+        // Even if logout fails on server, clear local data
+        localStorage.removeItem("session");
+        setIsAuthenticated(false);
+        navigate("/signin");
+      }
+    };
+
   return (
-    <header className="header">
-      <Link to="/">
-        <img src="./images/logo.png" alt="GymSlay Logo" className="logo" />
-      </Link>
-      <MenuBtn />
-    </header>
+    <>
+      <header className='header'>
+        <div className="navbar-spacer">
+          <Link to="/">
+            <img src="./images/logo.png" alt="GymSlay Logo" className='logo'/>
+          </Link>
+          {!isAuthenticated ? (
+            <button className="menu-item" onClick={handleSignInClick}>
+              Logga in
+            </button>
+          ) : (
+            !isDesktop ? (
+              <MenuBtn />
+            ) : (
+              <nav className="navbar">
+                {isAdminMode ? getAdminNavLinks() : getUserNavLinks()}
+              </nav>
+            )
+          )}
+        </div>
+      </header>
+
+      <SignInModal
+        isOpen={showSignInModal}
+        onClose={() => setShowSignInModal(false)}
+        onSignIn={handleSignIn}
+        onRegister={handleRegister}
+      />
+    </>
   );
 };

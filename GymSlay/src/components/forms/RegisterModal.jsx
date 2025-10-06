@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "../modal/Modal";
 import RegisterForm from "./RegisterForm";
 
-const RegisterModal = ({ isOpen, onClose, onRegister }) => {
+export const RegisterModal = ({ isOpen, onClose, onRegister }) => {
   const handleRegister = async (formData) => {
     if (onRegister) {
       await onRegister(formData);
@@ -18,4 +18,3 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
   );
 };
 
-export default RegisterModal;

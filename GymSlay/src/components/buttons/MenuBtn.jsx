@@ -3,15 +3,22 @@ import { IoLogOut, IoLogIn } from "react-icons/io5";
 import { FaCalendarAlt } from "react-icons/fa";
 import menuIcon from "../../assets/images/MenuBtn.svg";
 import "./buttons.css";
-import { useNavigate } from "react-router-dom";
-import { signIn, signOut } from "../../services/api";
-import SignInModal from "../forms/SignInModal";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
+import { API_URL, signIn, signOut } from "../../services/api";
+import { SignInModal } from "../forms/SignInModal";
 
 export const MenuBtn = () => {
   const [open, setOpen] = useState(false);
+  const [isAdminMode, setIsAdminMode] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate();;
+  const location = useLocation();
+
+  useEffect(() => {
+    const isOnAdminPage = location.pathname.includes('Admin') || location.pathname.includes('createsessions');
+    setIsAdminMode(isOnAdminPage);
+  }, [location.pathname]);
 
   // Check authentication status on component mount and when localStorage changes
   useEffect(() => {
@@ -75,14 +82,23 @@ export const MenuBtn = () => {
     }
   };
 
-  const handleRegister = async (formData) => {
-    console.log("Register attempt with:", formData);
-
-    // Registration is not implemented in the backend yet
-    throw new Error(
-      "Registrering är inte tillgänglig ännu. Kontakta administratören för att skapa ett konto."
-    );
-  };
+   async function handleRegister(formData) {
+    console.log("Register attempt ************ with:", formData);
+    const response = await fetch(`${API_URL}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData),
+    });
+  
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.Message || errorData.message || 'Registrering misslyckades');
+    }
+  
+    return { success: true, message: 'Registrering lyckades' };
+  }
 
   const handleLogout = async () => {
     try {
@@ -91,7 +107,7 @@ export const MenuBtn = () => {
       // Clear authentication state immediately
       setIsAuthenticated(false);
       setOpen(false);
-      navigate("/");
+      navigate("/signin");
       console.log("Logout successful");
     } catch (error) {
       console.error("Logout error", error);
@@ -99,7 +115,7 @@ export const MenuBtn = () => {
       localStorage.removeItem("session");
       setIsAuthenticated(false);
       setOpen(false);
-      navigate("/");
+      navigate("/signin");
     }
   };
 
@@ -114,20 +130,39 @@ export const MenuBtn = () => {
       </button>
 
       {open && (
+        
         <div className="dropdown-menu">
           {!isAuthenticated ? (
             <button className="menu-item" onClick={handleSignInClick}>
               <IoLogIn className="menu-icon" /> Logga in
             </button>
           ) : (
-            <>
-              <button className="menu-item">
-                <FaCalendarAlt className="menu-icon" /> Bokningar
-              </button>
-              <button className="menu-item logout-btn" onClick={handleLogout}>
-                <IoLogOut className="menu-icon" /> Logga ut
-              </button>
-            </>
+            isAdminMode ? (
+              <>
+                <NavLink to="/sessionsadmin" className="menu-item" onClick={() => setOpen(false)}>
+                  <FaCalendarAlt className="menu-icon" /> Alla Pass
+                </NavLink>
+                <NavLink to="/createsessions" className="menu-item" onClick={() => setOpen(false)}>
+                  <FaCalendarAlt className="menu-icon" /> Skapa Pass
+                </NavLink>
+                <button className="menu-item logout-btn" onClick={handleLogout}>
+                  <IoLogOut className="menu-icon" /> Logga ut
+                </button>
+              </>
+            )
+          : (
+              <>
+                <NavLink to="/sessionsuser" className="menu-item" onClick={() => setOpen(false)}>
+                  <FaCalendarAlt className="menu-icon" /> Alla Pass
+                </NavLink>
+                <NavLink to="/userbookings" className="menu-item" onClick={() => setOpen(false)}>
+                  <FaCalendarAlt className="menu-icon" /> Mina Bokningar
+                </NavLink>
+                <button className="menu-item logout-btn" onClick={handleLogout}>
+                  <IoLogOut className="menu-icon" /> Logga ut
+                </button>
+              </>
+            )
           )}
         </div>
       )}

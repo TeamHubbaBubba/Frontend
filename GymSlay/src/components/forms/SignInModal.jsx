@@ -3,7 +3,7 @@ import Modal from "../modal/Modal";
 import SignInForm from "./SignInForm";
 import RegisterForm from "./RegisterForm";
 
-const SignInModal = ({ isOpen, onClose, onSignIn, onRegister }) => {
+export const SignInModal = ({ isOpen, onClose, onSignIn, onRegister }) => {
   const [isRegisterMode, setIsRegisterMode] = useState(false);
 
   const handleSignIn = async (formData) => {
@@ -90,4 +90,3 @@ const SignInModal = ({ isOpen, onClose, onSignIn, onRegister }) => {
   );
 };
 
-export default SignInModal;

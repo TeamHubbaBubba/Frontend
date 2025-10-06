@@ -50,8 +50,8 @@ export const CreateSessionForm = () => {
   }
 
   return (
-    <div className="sessions-form">
-      <h2>Skapa ny session</h2>
+    <div className="create-form">
+      <h2>Skapa nytt pass</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Titel</label>
@@ -117,7 +117,7 @@ export const CreateSessionForm = () => {
         </div>
 
         <button type="submit" className="btn-submit">
-          Skapa session
+          Skapa pass
         </button>
       </form>
     </div>
